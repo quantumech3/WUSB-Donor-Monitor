@@ -9,5 +9,5 @@ setup(
     author='quant',
     author_email='',
     description='',
-    install_requires=["markdown"]
+    install_requires=["google-api-python-client", "google-auth-httplib2", "google-auth-oauthlib"]
 )
