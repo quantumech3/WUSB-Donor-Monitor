@@ -3,14 +3,15 @@ import websockets
 import threading
 import http.server
 import socketserver
+import json
 
 def webSocket():
     # Gets called when someone logins to websocket server
     async def handleLogin(websocket, path):
         print("A new friend logged in :D")
 
-        # Send the text 'a message' to client
-        await websocket.send("A message")
+        # Send credentials json to client
+        await websocket.send(open("credentials.json").read())
 
         # Print message sent back from client
         print(await websocket.recv())

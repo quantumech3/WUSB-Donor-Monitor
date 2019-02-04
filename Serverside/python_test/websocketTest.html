@@ -12,7 +12,9 @@
 
     // On 'a message' received, prompt user with the text the server sent
     ws.onmessage = function (ev) {
-        prompt(ev.data)
+
+        // Prompt user with the type of GAPI credentials server is using
+        prompt(JSON.parse(ev.data).type)
 
         // Send message back to server
         ws.send("We arent friends server, just acquaintances.");
