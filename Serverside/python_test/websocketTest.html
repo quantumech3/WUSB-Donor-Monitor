@@ -8,11 +8,14 @@
 
 <script>
     // Connect to WebSocket server
-    var ws = new WebSocket("ws://localhost:8080/");
+    var ws = new WebSocket("ws://localhost:8000/");
 
-    // On 'a message' recieved, prompt user with the text the server sent
+    // On 'a message' received, prompt user with the text the server sent
     ws.onmessage = function (ev) {
         prompt(ev.data)
+
+        // Send message back to server
+        ws.send("We arent friends server, just acquaintances.");
     }
 </script>
 
