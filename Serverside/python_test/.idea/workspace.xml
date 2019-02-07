@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="babce5bd-5534-454d-b33d-effa8d842622" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/websocketTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/websocketTest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/websocketTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/websocketTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/websocketTestMultithreaded.py" beforeDir="false" afterPath="$PROJECT_DIR$/websocketTestMultithreaded.py" afterDir="false" />
+    <list default="true" id="babce5bd-5534-454d-b33d-effa8d842622" name="Default Changelist" comment="Server and client can now send each other JSON's">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/domOrJQuery.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/python_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/python_test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,11 +25,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="websocketTest.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="websocketTest.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/websocketTest.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+            <state relative-caret-position="289">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="domOrJQuery.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/domOrJQuery.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -60,11 +70,18 @@
         <option value="$PROJECT_DIR$/jsonTest.py" />
         <option value="$PROJECT_DIR$/httpServerTest.html" />
         <option value="$PROJECT_DIR$/websocketTest.html" />
+        <option value="$PROJECT_DIR$/domOrJQuery.html" />
       </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
@@ -73,7 +90,7 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
+    <option name="x" value="953" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
@@ -83,6 +100,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -94,14 +112,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -115,7 +133,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Unknown.asyncio_gspreadTest1748380627">
+  <component name="RunManager" selected="Unknown.asyncio_gspreadTest1871723869">
     <configuration name="asyncio_gspreadTest" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="python_test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -233,7 +251,10 @@
       <option name="presentableId" value="Default" />
       <updated>1548546204232</updated>
       <workItem from="1549228338855" duration="2530000" />
-      <workItem from="1549247477098" duration="3933000" />
+      <workItem from="1549247477098" duration="5333000" />
+      <workItem from="1549321014295" duration="732000" />
+      <workItem from="1549322803034" duration="447000" />
+      <workItem from="1549421102696" duration="1586000" />
     </task>
     <task id="LOCAL-00001" summary="Got gspread to work">
       <created>1549173304443</created>
@@ -249,11 +270,18 @@
       <option name="project" value="LOCAL" />
       <updated>1549178816298</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Server and client can now send each other JSON's">
+      <created>1549317023900</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1549317023900</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6463000" />
+    <option name="totallyTimeSpent" value="10628000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -265,10 +293,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21334793" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22319475" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32932165" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
@@ -300,9 +328,59 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Got gspread to work" />
     <MESSAGE value="Created threadingTest and jsonTest&#10;jsonTest doesnt work yet" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created threadingTest and jsonTest&#10;jsonTest doesnt work yet" />
+    <MESSAGE value="Server and client can now send each other JSON's" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server and client can now send each other JSON's" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/httpServerTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/websocketTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domOrJQuery.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="11" lean-forward="true" selection-start-line="14" selection-start-column="11" selection-end-line="14" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/httpServerTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/websocketTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/httpServerTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="11" selection-start-line="18" selection-start-column="11" selection-end-line="18" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/websocketTest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="72" selection-start-line="15" selection-start-column="72" selection-end-line="15" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/httpServerTest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -356,9 +434,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/credentials.json.backup" />
-    <entry file="file://$PROJECT_DIR$/credentials.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/json.json" />
     <entry file="file://$PROJECT_DIR$/jsonTest.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -388,10 +463,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/credentials.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/websocketTest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="46" selection-start-line="10" selection-start-column="46" selection-end-line="10" selection-end-column="46" />
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/domOrJQuery.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
         </state>
       </provider>
     </entry>
