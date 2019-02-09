@@ -10,7 +10,7 @@ async def handleLogin(websocket, path):
     await websocket.send("A message")
 
 # Instantiate Websocket server with 'handleLogin()' handling events and hosting from address 'localhost' on port 8080
-start_server = websockets.serve(handleLogin, "localhost", 8080)
+start_server = websockets.serve(handleLogin, "0.0.0.0", 8000)
 
 # Launch server as async process (Must be an async process according to the api)
 asyncio.get_event_loop().run_until_complete(start_server)
