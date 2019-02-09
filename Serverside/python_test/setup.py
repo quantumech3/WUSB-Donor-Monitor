@@ -9,5 +9,5 @@ setup(
     author='quant',
     author_email='',
     description='',
-    install_requires=["gspread"]
+    install_requires=["gspread", "Flask", "Flask-SocketIO", "eventlet"]
 )

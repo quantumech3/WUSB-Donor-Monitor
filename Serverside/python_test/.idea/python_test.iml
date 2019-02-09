@@ -8,6 +8,10 @@
     <orderEntry type="library" name="@types/mysql" level="application" />
     <orderEntry type="library" name="@types/socket.io" level="application" />
     <orderEntry type="library" name="@types/socket.io-client" level="application" />
+    <orderEntry type="library" name="@types/gapi" level="application" />
+    <orderEntry type="library" name="@types/gapi.client.sheets" level="application" />
+    <orderEntry type="library" name="@types/socket.io" level="application" />
+    <orderEntry type="library" name="@types/socket.io-client" level="application" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />

@@ -6,19 +6,31 @@
 </head>
 <body>
 
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+
+
+
 <script>
     // Connect to WebSocket server
-    var ws = new WebSocket("ws://172.20.97.70:8000/");
+    //var ws = new WebSocket("ws://172.20.97.70:8000/");
 
     // On 'a message' received, prompt user with the text the server sent
-    ws.onmessage = function (ev) {
+    /*ws.onmessage = function (ev) {
 
         // Prompt user with the type of GAPI credentials server is using
-        prompt(JSON.parse(ev.data).type)
+        prompt(ev.data)
 
         // Send message back to server
         ws.send("We arent friends server, just acquaintances.");
-    }
+    }*/
+
+    var socketio = io.connect('http://' + document.domain + ':' + location.port);
+
+    socketio.on('connect', function()
+    {
+        socketio.emit('message', {data: "Hello server, can we talk?"})
+    })
+
 </script>
 
 </body>

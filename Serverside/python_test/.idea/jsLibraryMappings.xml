@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@types/jquery, @types/mysql, @types/socket.io, @types/socket.io-client}" />
+    <file url="PROJECT" libraries="{@types/gapi, @types/gapi.client.sheets, @types/socket.io, @types/socket.io-client}" />
   </component>
 </project>
