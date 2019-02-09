@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     # Sends data inside index.html back to client
-    return send_file("webpage/index.html")
+    return send_file("websocketTest.html")
 
 # 'path', inside of @app.route(), is a variable whose type is ironically named 'path' (like string but allows slashes)
 # Variables specified inside of app.route get mapped to parameters in function
@@ -19,4 +19,4 @@ def res(path):
     return send_file("webpage/"+path)
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run(host="0.0.0.0", port=8000)
