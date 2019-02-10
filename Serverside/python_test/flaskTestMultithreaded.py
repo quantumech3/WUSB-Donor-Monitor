@@ -1,5 +1,6 @@
 from flask import Flask, send_file, send_from_directory
 from flask_socketio import SocketIO
+import threading
 
 # Instantiate Flask server with the name of this module as its 'import_name'
 app = Flask(__name__)
@@ -22,7 +23,7 @@ def res(path):
     # YOU SHOULD NOT PUT A SLASH BEFORE THE FIRST ARGUEMENT IN send_file BECAUSE IT WILL NOT LOAD THE FILE BECAUSE
     # IT WOULD TRY TO LOAD FROM './/webpage/*' which doesnt make any sence
     try:
-        return send_file("webpage/"+path)
+        return send_file("webpage/" + path)
     except FileNotFoundError:
         print("Could not retrieve file for client: " + path)
         return "<b>Could not retrieve file from server... Sorry :(</b>"
@@ -31,13 +32,30 @@ def res(path):
 @socketio.on("message")
 def msg_event(msg):
     print(msg['data'])
-    print()
 
 # Event that runs when client connects
 @socketio.on('connect')
 def handle_connection():
     socketio.emit('data', "Happy birthday client! Here, have some data :D")
 
-if __name__ == "__main__":
-    # Run SocketIO server on top of 'app' HTTP server
-    socketio.run(app, host="0.0.0.0", port=8000)
+
+def cmd_thread():
+    '''
+    Starts and runs the command line interface.
+    '''
+
+    while True:
+        inpt = input("WUSB []: ")
+
+        if inpt == "exit":
+            socketio.stop()
+            exit(0)
+
+
+
+# Start server thread
+t1 = threading.Thread(target=socketio.run, args=[app], kwargs={'host': "0.0.0.0", 'port': 8000})
+t1.setDaemon(True)
+t1.start()
+
+cmd_thread()
