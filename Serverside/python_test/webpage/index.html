@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alfa+Slab+One">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body style="padding-right: 126px;padding-bottom: -1px;margin-right: 53px;margin-left: 140px;">
+    <p class="lead text-center border-warning shadow-lg d-xl-flex flex-fill justify-content-start align-self-center mx-auto justify-content-xl-center align-items-xl-center" style="font-size: 45px;width: 695px;height: 288px;margin-top: 37px;padding: 2px;padding-top: 2px;padding-bottom: 0%;">The revolution is revolutionary, so become apart of the revolution that is going to take the revolution market by storm.</p><a class="text-center d-xl-flex justify-content-xl-center align-items-xl-center" href="#" style="margin-top: 46px;">&gt; Buy an overpriced metal brick here</a>
+    <div
+        class="text-center shadow justify-content-center align-content-center" style="margin-top: 23px;height: 100%;">
+        <h1 class="text-center" style="padding-bottom: 0px;padding-top: 0px;">Reasons to become a gamer</h1>
+        <hr style="margin-bottom: 16px;margin-top: 15px;">
+        <ul class="list-unstyled d-inline justify-content-center align-content-center" style="margin-bottom: 40px;width: 482px;margin-right: 25%;">
+            <li>You are a true gamer if you get this</li>
+            <li>If you dont get this then Steve Jobs will fucking haunt you</li>
+        </ul><iframe class="d-xl-flex" width="560" height="315" allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/Q6_5InVJZ88" id="video" style="margin-left: 0%;width: 881px;"></iframe></div>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+        <script>
+
+            let x = 0
+            setInterval(function()
+            {
+                x++;
+                if(new Date().getMilliseconds() < 10 && x > 10)
+                {
+                    $.getJSON("/data/data", function(data)
+                    {
+                        console.log(data.data1)
+                    })
+                }
+            }, 1)
+        </script>
+</body>
+
+</html>
