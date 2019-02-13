@@ -1,10 +1,18 @@
+File structure layout:
+	'Start server.sh' starts the server
+	Folder named 'Source' containing:
+		All serverside python files
+		.pickle file named 'Cred.pickle'
+			Contains GAPI credentials
+			Contains copyright message displayed at beginning of program
+		Folder named 'Website' containing:
+			All files for website
+
 SERVER
 -----------------------------------------------------------------------
 
 Document setup.py and how it will be used to sync project with server
 Document every library used for serverside
-
-
 
 Database class built on top of Google Sheets (This is made so minimal changes are needed when we switch to a local database)
 
@@ -36,12 +44,6 @@ Figure out Startup module:
 	Starts Hosting module on daemon seperate thread
 	Starts Data getting module on daemon seperate thread
 	Starts Command line module on non-daemon main thread
-
-File structure layout:
-	.pickle file named 'Cred.pickle'
-		Contains GAPI credentials
-		Contains copyright message displayed at beginning of program
-
 
 ------------------------------------------------------------------------
 CLIENT
@@ -80,16 +82,23 @@ UI element ID's:
 	'most_recent_donor': Displays the name of the most recent donor
 	'most_recent_donation_amt': Displays amount most recent donor donated
 
-Inline JS:
-	Updates 'time_left' every second to count down to Radiothon end
+Display module:
+	Has a getter and setter for every dynamic element in the page (elements that change)
 
-Reciever module:
-	Initializes SocketIO
-	Recieves data sent from server via SocketIO
-	Updates page to display data when data is recieved from server
-	Updates webpage to display latest information from server
+Inline JS:
+	Updates 'time_left' every second to count down to Radiothon end.
+	Gets the difference beteen the current time and the end date from DOM
+
 
 CalcData module:
 	Calculates and deducts data from information sent by server
 	Called by reciever module on update
+
+Reciever module:
+	Initializes SocketIO
+	Recieves data sent from server via SocketIO
+	Gets calculated data
+	Updates page to display data using Display module when data is recieved from server
+	Updates webpage to display latest information from server
+
 
