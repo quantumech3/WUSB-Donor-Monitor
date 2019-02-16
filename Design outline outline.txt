@@ -18,10 +18,15 @@ Document every library used for serverside
 
 Database class built on top of Google Sheets (This is made so minimal changes are needed when we switch to a local database)
 
+Data GSParcer module: 
+	Parses and packs data into a format that satisfies requirements and can be used by client and server
+	Has method 'Dict toDonor(Str[] data, Str[] col_head)' that turns an entry from GSheets into a 'Donor' data structure
+	Has method 'Dict getRadiothonInfo(Dict donors[], Dict config)' that uses data from config and donors to create a 'RadiothonInfo' data structure
+
 Data Getter module:
 	Has an 'entry method' that gets called by startup module
 	Gets data from Google Sheets using Database class
-	Parses and packs data into a format that satisfies requirements and can be used by client and server
+	Parces 
 	Runs concurrently on seperate daemon thread
 	Sends Google Sheets data to client periodically
 
