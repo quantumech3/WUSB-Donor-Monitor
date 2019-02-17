@@ -1,7 +1,7 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
-    name='Source',
+    name='WUSB-Server',
     version='1.0',
     packages=[''],
     url='',
