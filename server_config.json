@@ -1,0 +1,20 @@
+{
+	"radiothon": {
+		"goal": {
+			"hourly": 0, 
+			"daily": 0, 
+			"weekly": 0, 
+			"total": 0
+		}, 
+
+		"name": "radiothonName", 
+		"start_date": "1/1/1", 
+		"end_date": "2/2/1"
+	}, 
+
+	"gsheets": {
+		"doc_ID": "id goes here", 
+		"wsheet_ID": "worksheet id goes here", 
+		"poll_interval": 0.1
+	}
+}

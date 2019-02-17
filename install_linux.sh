@@ -1,0 +1,1 @@
+sudo ./Source/setup.py develop
