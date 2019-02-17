@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+'''
+Created by Scott Burgert on 2/17/2019
+Project name: WUSB Donor Monitor ©
+
+Module name: setup.py
+Module description:
+        This is a install script that gets ran either by 'install_windows.bat' or 'install_linux.sh'
+'''
+
+
 from setuptools import setup
 
 setup(
