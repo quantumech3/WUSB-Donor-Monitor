@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>WUSB Donor Monitor</title>
+    <link rel="icon" type="image/jpeg" sizes="318x159" href="assets/img/favicon.jpg">
+    <link rel="icon" type="image/jpeg" sizes="318x159" href="assets/img/favicon.jpg">
+    <link rel="icon" type="image/jpeg" sizes="318x159" href="assets/img/favicon.jpg">
+    <link rel="icon" type="image/jpeg" sizes="318x159" href="assets/img/favicon.jpg">
+    <link rel="icon" type="image/jpeg" sizes="318x159" href="assets/img/favicon.jpg">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cambay">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="shadow-lg d-xl-flex align-items-start flex-wrap" id="wrapper" style="background-color: #ffffff;margin-right: auto;margin-left: auto;width: 150vh;height: 142vh;display: flex;">
+        <div class="text-center shadow d-xl-flex justify-content-xl-center align-items-xl-start" id="header" style="background-color: #9c0000;width: 100%;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;height: auto;max-height: 225px;padding-bottom: 0px;margin-bottom: 0px;">
+            <header>
+                <h1 id="title" style="color: rgb(255,255,255);font-size: 60px;margin-top: 9px;">radiothonName</h1>
+                <div class="text-center shadow" style="height: 100%;;;background-color: #ff0000;margin-right: auto;margin-left: auto;margin-bottom: 8px;margin-top: 8px;width: 818px;padding-top: 5px;border-radius: 10px;">
+                    <h2 style="width: auto;color: rgb(255,255,255);">Ends in:&nbsp;<span id="time_left">XX:YY:ZZ:WW</span></h2>
+                    <p style="padding-top: 7px;color: rgb(255,255,255);">From&nbsp;<span id="start_date">mm/dd/yy</span>&nbsp;to&nbsp;<span id="end_date">mm/dd/yy</span></p>
+                </div>
+                <p class="text-center" style="color: rgb(255,255,255);font-size: 12px;padding-top: 9px;">This program was written and developed in 2019 by Scott Burgert ©&nbsp;<br></p>
+            </header>
+        </div>
+        <div class="shadow d-xl-flex flex-wrap tab" id="goals_tab" style="width: 100%;height: 172px;margin-top: 1%;background-color: #ebebeb;margin-bottom: -106px;">
+            <header style="margin-right: auto;margin-left: auto;width: 100%;">
+                <h1 class="text-center shadow" style="background-color: #9c0000;color: #ffffff;font-size: 36px;padding-bottom: 5px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">Goals</h1>
+            </header>
+            <div class="text-center d-xl-flex justify-content-center mx-auto" style="width: 100%;margin-bottom: auto;padding-bottom: 0px;margin-top: -6px;">
+                <div class="d-xl-flex flex-wrap" style="width: auto;height: auto;padding-right: 0;padding-left: 0;margin-right: auto;margin-left: auto;background-color: #ffffff;padding-top: 0;padding-bottom: 0;border-radius: 10px;">
+                    <header>
+                        <h1 style="font-size: 19px;background-color: #f2f2f2;width: 212px;color: rgb(115,115,115);padding-bottom: 2px;">Hourly</h1><span id="goal_hourly" style="font-size: 36px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;">$12345</span></header>
+                </div>
+                <div class="d-xl-flex flex-wrap" style="width: auto;height: auto;padding-right: 0;padding-left: 0;margin-right: auto;margin-left: auto;background-color: #ffffff;padding-top: 0;padding-bottom: 0;border-radius: 10px;">
+                    <header>
+                        <h1 style="font-size: 19px;background-color: #f2f2f2;width: 212px;color: rgb(115,115,115);padding-bottom: 2px;">Daily</h1><span id="goal_daily" style="font-size: 36px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;">$12345</span></header>
+                </div>
+                <div class="d-xl-flex flex-wrap" style="width: auto;height: auto;padding-right: 0;padding-left: 0;margin-right: auto;margin-left: auto;background-color: #ffffff;padding-top: 0;padding-bottom: 0;border-radius: 10px;">
+                    <header>
+                        <h1 style="font-size: 19px;background-color: #f2f2f2;width: 212px;color: rgb(115,115,115);padding-bottom: 2px;">Weekly</h1><span id="goal_weekly" style="font-size: 36px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;">$12345</span></header>
+                </div>
+                <div class="d-xl-flex flex-wrap" style="width: auto;height: auto;padding-right: 0;padding-left: 0;margin-right: auto;margin-left: auto;background-color: #ffffff;padding-top: 0;padding-bottom: 0;border-radius: 10px;">
+                    <header>
+                        <h1 style="font-size: 19px;background-color: #f2f2f2;width: 212px;color: rgb(115,115,115);padding-bottom: 2px;">Total</h1><span id="goal_total" style="font-size: 36px;padding-top: 0px;padding-bottom: 0px;margin-top: 0px;">$12345</span></header>
+                </div>
+            </div>
+        </div>
+        <div class="shadow" id="pledges_tab" style="background-color: #e9e9e9;width: 100%;height: 800px;margin-top: 119px;">
+            <header style="margin-right: auto;margin-left: auto;width: 100%;">
+                <h1 class="text-center shadow" style="background-color: #9c0000;color: #ffffff;font-size: 36px;padding-bottom: 5px;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">Pledges</h1>
+            </header>
+            <div class="d-xl-flex justify-content-xl-center" style="margin-right: 10px;margin-left: 10px;height: 559px;background-color: rgba(242,242,242,0);padding-right: 0px;border-top-right-radius: 10px;width: auto;border-top-left-radius: 10px;padding-bottom: 0px;margin-bottom: -7px;">
+                <div id="pledge_table" style="margin-right: 10px;margin-left: 0;height: 500px;background-color: #ffffff;padding-right: 0px;width: auto;padding-left: 0px;border-radius: 10px;margin-bottom: 10px;padding-bottom: 0px;">
+                    <header style="background-color: #f2f2f2;margin-bottom: 0px;padding-bottom: 1px;width: 100%;height: 73px;border-top-right-radius: 10px;border-top-left-radius: 10px;padding-right: 0px;margin-top: 0px;">
+                        <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Credit card pledges:&nbsp;<span id="credit_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
+                        <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
+                    </header>
+                    <div class="table-responsive" id="credit_list" style="height: 432px;">
+                        <table class="table">
+                            <thead>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Goober</td>
+                                    <td>Port jefferson</td>
+                                    <td>12345$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer>
+                        <h1 class="text-center" style="background-color: #f2f2f2;color: #737373;font-size: 26px;padding-bottom: 10px;">Total: $<span id="credit_total" style="background-color: white;border-radius: 10px;">12345</span></h1>
+                    </footer>
+                </div>
+                <div id="pledge_table" style="margin-right: 10px;margin-left: 0;height: 500px;background-color: #ffffff;padding-right: 0px;width: auto;padding-left: 0px;border-radius: 10px;margin-bottom: 10px;padding-bottom: 0px;">
+                    <header style="background-color: #f2f2f2;margin-bottom: 0px;padding-bottom: 1px;width: 100%;height: 73px;border-top-right-radius: 10px;border-top-left-radius: 10px;padding-right: 0px;margin-top: 0px;">
+                        <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Website pledges:&nbsp;<span id="web_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
+                        <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
+                    </header>
+                    <div class="table-responsive" id="web_list" style="height: 432px;">
+                        <table class="table">
+                            <thead>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Goober</td>
+                                    <td>Port jefferson</td>
+                                    <td>12345$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer>
+                        <h1 class="text-center" style="background-color: #f2f2f2;color: #737373;font-size: 26px;padding-bottom: 10px;">Total: $<span id="web_total" style="background-color: white;border-radius: 10px;">12345</span></h1>
+                    </footer>
+                </div>
+                <div id="pledge_table" style="margin-right: 10px;margin-left: 0;height: 500px;background-color: #ffffff;padding-right: 0px;width: auto;padding-left: 0px;border-radius: 10px;margin-bottom: 10px;padding-bottom: 0px;">
+                    <header style="background-color: #f2f2f2;margin-bottom: 0px;padding-bottom: 1px;width: 100%;height: 73px;border-top-right-radius: 10px;border-top-left-radius: 10px;padding-right: 0px;margin-top: 0px;">
+                        <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Paid callers:&nbsp;<span id="paid_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
+                        <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
+                    </header>
+                    <div class="table-responsive" id="paid_list" style="height: 432px;">
+                        <table class="table">
+                            <thead>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Goober</td>
+                                    <td>Port jefferson</td>
+                                    <td>12341$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer>
+                        <h1 class="text-center" style="background-color: #f2f2f2;color: #737373;font-size: 26px;padding-bottom: 10px;">Total: $<span id="paid_caller_total" style="background-color: white;border-radius: 10px;">12345</span></h1>
+                    </footer>
+                </div>
+                <div id="pledge_table" style="margin-right: 10px;margin-left: 0;height: 500px;background-color: #ffffff;padding-right: 0px;width: auto;padding-left: 0px;border-radius: 10px;margin-bottom: 10px;padding-bottom: 0px;">
+                    <header style="background-color: #f2f2f2;margin-bottom: 0px;padding-bottom: 1px;width: 100%;height: 73px;border-top-right-radius: 10px;border-top-left-radius: 10px;padding-right: 0px;margin-top: 0px;">
+                        <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Unpaid callers:&nbsp;<span id="unpaid_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
+                        <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
+                    </header>
+                    <div class="table-responsive" id="unpaid_list" style="height: 432px;">
+                        <table class="table">
+                            <thead>
+                                <tr></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Goober</td>
+                                    <td>Port jefferson</td>
+                                    <td>12341$</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer>
+                        <h1 class="text-center" style="background-color: #f2f2f2;color: #737373;font-size: 26px;padding-bottom: 10px;">Total: $<span id="unpaid_caller_total" style="background-color: white;border-radius: 10px;">12345</span></h1>
+                    </footer>
+                </div>
+            </div>
+            <div class="d-xl-flex mx-auto justify-content-xl-center" style="height: 146px;background-color: #f2f2f2;margin: 0px;padding: 0px;border-radius: 25px;margin-right: 0px;margin-left: 0px;margin-bottom: 6px;margin-top: 6px;">
+                <header style="padding-right: 13px;width: 271px;">
+                    <h1 class="text-center" style="width: 424px;height: 60px;background-color: rgba(115,115,115,0);margin-right: -1px;padding-right: 164px;padding-left: 0px;color: #737373;font-size: 26px;padding-top: 17px;margin-top: -16px;">Paid total</h1>
+                    <h1 class="text-center" id="paid_total" style="background-color: #ffffff;padding-bottom: 6px;">$12345</h1>
+                </header>
+                <header style="padding-right: 15px;width: 271px;margin-right: 72px;">
+                    <h1 class="text-center" style="width: 424px;height: 60px;background-color: rgba(115,115,115,0);margin-right: -1px;padding-right: 164px;padding-left: 0px;color: #737373;font-size: 26px;padding-top: 17px;margin-top: -16px;">Total pledge amount</h1>
+                    <h1 class="text-center" id="full_total" style="background-color: #ffffff;padding-bottom: 6px;">$12345</h1>
+                </header>
+                <header style="padding-right: 13px;width: 271px;">
+                    <h1 class="text-center" style="width: 424px;height: 60px;background-color: rgba(115,115,115,0);margin-right: -1px;padding-right: 164px;padding-left: 0px;color: #737373;font-size: 26px;padding-top: 17px;margin-top: -16px;">Most recent donor</h1>
+                    <h1 class="text-center" id="recent_name" style="background-color: #ffffff;padding-bottom: 6px;">Goober</h1>
+                </header>
+                <header style="padding-right: 13px;width: 271px;">
+                    <h1 class="text-center" style="width: 424px;height: 60px;background-color: rgba(115,115,115,0);margin-right: -1px;padding-right: 164px;padding-left: 0px;color: #737373;font-size: 26px;padding-top: 17px;margin-top: -16px;">Most recent pledge</h1>
+                    <h1 class="text-center" id="recent_amt" style="background-color: #ffffff;padding-bottom: 6px;">$12345</h1>
+                </header>
+            </div>
+        </div>
+        <p class="text-center" style="width: 100%;color: #737373;">This program was written and developed in 2019 by Scott Burgert ©&nbsp;<br></p>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
