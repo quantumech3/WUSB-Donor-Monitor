@@ -14,7 +14,7 @@
 
 	"gsheets": {
 		"doc_ID": "id goes here", 
-		"wsheet_ID": "worksheet id goes here", 
+		"wsheet_ID": 0, 
 		"poll_interval": 0.1
 	}
 }
