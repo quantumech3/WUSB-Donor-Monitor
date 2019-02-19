@@ -144,6 +144,11 @@ function extpUnpaidDonors(donors=[])
     return unpaidDonors;
 }
 
+/**
+ * Returns the sum of all of ‘donors’s ‘amtDonated’ values
+ * @DonorEnum[] donors
+ * @return {number}
+ */
 function totalDonated(donors=[])
 {
     let total = 0;

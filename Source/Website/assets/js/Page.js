@@ -247,3 +247,462 @@ class Goals
     }
 }
 
+/**
+ * Contains methods for manipulating elements in the ‘Pledges’ tab
+ */
+class Pledges
+{
+    /**
+     * Internal method used by setSomethingEntries() to edit table data.
+     * This method takes in a list of data and returns HTML used for <table> entries
+     * @list data
+     * @return {string}
+     * @private
+     */
+    static _toTableRow(data=[])
+    {
+        // htmlText accumulates html tags. Starts with <tr>
+        let htmlText = "<tr>";
+
+        // Add table column html code containing values from 'data[]'
+        for(let i = 0; i < data.length; i++)
+        {
+            htmlText += "<td>" + data[i] + "</td>";
+        }
+
+        // Close htmlText with </tr>
+        htmlText += "</tr>";
+
+        return htmlText;
+    }
+
+    /**
+     * Sets text in ‘credit_count‘ to value of ‘count’
+     * @param count
+     */
+    static setCreditCount(count)
+    {
+        if(typeof count === 'number')
+            $('#credit_count').text(count);
+        else
+            // Throw error if count is not a number
+            console.error("Invalid object passed as 'count' parameter. Value passed: '" + count + "' should be a number");
+    }
+
+    /**
+     * Gets value of ‘credit_count’ element
+     * @return {number}
+     */
+    static getCreditCount()
+    {
+        // Gets text from credit_count element
+        let count = $('#credit_count').text();
+
+        // Attempt to parce credit_count text into float
+        count = parseFloat(count);
+
+        // Throw error if credit_count text cannot be casted to float
+        if(isNaN(count))
+            console.error("Could not cast credit_count value '" + $('#credit_count').text() + "' to float.");
+        else
+            return count;
+    }
+
+    /**
+     * Sets text in ‘credit_total‘ to value of ‘total’
+     * @float total
+     */
+    static setCreditTotal(total)
+    {
+        if(typeof total === 'number')
+            $('#credit_total').text(total);
+        else
+            // Throw error if total is not a number
+            console.error("Invalid object passed as 'total' parameter. Value passed: '" + total + "' should be a number");
+    }
+
+    /**
+     * Gets the current credit total by getting text from element ‘credit_total’ as float.
+     * @return {number}
+     */
+    static getCreditTotal()
+    {
+        // Gets text from credit_total element
+        let total = $('#credit_total').text();
+
+        // Attempt to parce credit_total text into float
+        total = parseFloat(total);
+
+        // Throw error if credit_total text cannot be casted to float
+        if(isNaN(total))
+            console.error("Could not cast credit_total value '" + $('#credit_total').text() + "' to float.");
+        else
+            return total;
+    }
+
+    /**
+     * ‘entries’ contain ‘Pledge‘ structures.
+     *  Sets the values inside ‘credit_list‘ to ‘entries’.
+     *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
+     * @DonorEnum[] entries
+     */
+    static setCreditEntries(entries=[])
+    {
+        // Accumulating html and setting all at once instead of appending 1 after another to avoid weird visual during updates.
+        let tblHtml = "";
+
+        // Add html containing columns with value of all donor's first name, city and amount donated
+        for(let i = 0; i < entries.length; i++)
+        {
+            if(typeof entries[i].firstName !== "string") // Throw error if donor.firstName is not a string
+                console.error("entries[" + i + "].firstName with value '" + entries[i].firstName + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].city !== "string") // Throw error if donor.city is not a string
+                console.error("entries[" + i + "].city with value '" + entries[i].city + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].amtDonated !== "number") // Throw error if donor.amtDonated is not a float
+                console.error("entries[" + i + "].amtDonated with value '" + entries[i].amtDonated + "' is supposed to be 'float' type but isnt");
+            else
+                // Add table row containing [donor.firstName, donor.city, '$' + donor.amtDonated] to tblHtml
+                tblHtml += Pledges._toTableRow([entries[i].firstName, entries[i].city, '$' + entries[i].amtDonated]);
+        }
+
+        // Update credit_list to display tblHtml rows and columns
+        $("#credit_list").html(tblHtml);
+    }
+
+    /**
+     * Sets current credit donors being displayed to values inside entries. Updates credit total, count,
+     * and entries in table
+     * @DonorEnum[] entries
+     */
+    static updateCreditView(entries=[])
+    {
+        let total = totalDonated(entries);
+
+        Pledges.setCreditEntries(entries);
+        Pledges.setCreditTotal(total);
+        Pledges.setCreditCount(entries.length);
+    }
+
+    /**
+     * Sets text in ‘web_count‘ to value of ‘count’
+     * @param count
+     */
+    static setWebCount(count)
+    {
+        if(typeof count === 'number')
+            $('#web_count').text(count);
+        else
+            // Throw error if count is not a number
+            console.error("Invalid object passed as 'count' parameter. Value passed: '" + count + "' should be a number");
+    }
+
+    /**
+     * Gets value of ‘web_count’ element
+     * @return {number}
+     */
+    static getWebCount()
+    {
+        // Gets text from web_count element
+        let count = $('#web_count').text();
+
+        // Attempt to parce web_count text into float
+        count = parseFloat(count);
+
+        // Throw error if web_count text cannot be casted to float
+        if(isNaN(count))
+            console.error("Could not cast web_count value '" + $('#web_count').text() + "' to float.");
+        else
+            return count;
+    }
+
+    /**
+     * Sets text in ‘web_total‘ to value of ‘total’
+     * @float total
+     */
+    static setWebTotal(total)
+    {
+        if(typeof total === 'number')
+            $('#web_total').text(total);
+        else
+        // Throw error if total is not a number
+            console.error("Invalid object passed as 'total' parameter. Value passed: '" + total + "' should be a number");
+    }
+
+    /**
+     * Gets the current web total by getting text from element ‘web_total’ as float.
+     * @return {number}
+     */
+    static getWebTotal()
+    {
+        // Gets text from web_total element
+        let total = $('#web_total').text();
+
+        // Attempt to parce web_total text into float
+        total = parseFloat(total);
+
+        // Throw error if web_total text cannot be casted to float
+        if(isNaN(total))
+            console.error("Could not cast web_total value '" + $('#web_total').text() + "' to float.");
+        else
+            return total;
+    }
+
+    /**
+     * ‘entries’ contain ‘Pledge‘ structures.
+     *  Sets the values inside ‘web_list‘ to ‘entries’.
+     *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
+     * @DonorEnum[] entries
+     */
+    static setWebEntries(entries=[])
+    {
+        // Accumulating html and setting all at once instead of appending 1 after another to avoid weird visual during updates.
+        let tblHtml = "";
+
+        // Add html containing columns with value of all donor's first name, city and amount donated
+        for(let i = 0; i < entries.length; i++)
+        {
+            if(typeof entries[i].firstName !== "string") // Throw error if donor.firstName is not a string
+                console.error("entries[" + i + "].firstName with value '" + entries[i].firstName + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].city !== "string") // Throw error if donor.city is not a string
+                console.error("entries[" + i + "].city with value '" + entries[i].city + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].amtDonated !== "number") // Throw error if donor.amtDonated is not a float
+                console.error("entries[" + i + "].amtDonated with value '" + entries[i].amtDonated + "' is supposed to be 'float' type but isnt");
+            else
+            // Add table row containing [donor.firstName, donor.city, '$' + donor.amtDonated] to tblHtml
+                tblHtml += Pledges._toTableRow([entries[i].firstName, entries[i].city, '$' + entries[i].amtDonated]);
+        }
+
+        // Update web_list to display tblHtml rows and columns
+        $("#web_list").html(tblHtml);
+    }
+
+    /**
+     * Sets current web donors being displayed to values inside entries. Updates web total, count,
+     * and entries in table
+     * @DonorEnum[] entries
+     */
+    static updateWebView(entries=[])
+    {
+        let total = totalDonated(entries);
+
+        Pledges.setWebEntries(entries);
+        Pledges.setWebTotal(total);
+        Pledges.setWebCount(entries.length);
+    }
+
+    /**
+     * Sets text in ‘paid_count‘ to value of ‘count’. Sets the amount of paid caller entries there are.
+     * @param count
+     */
+    static setPaidCount(count)
+    {
+        if(typeof count === 'number')
+            $('#paid_count').text(count);
+        else
+            // Throw error if count is not a number
+            console.error("Invalid object passed as 'count' parameter. Value passed: '" + count + "' should be a number");
+    }
+
+    /**
+     * Gets value of ‘paid_count’ element. Gets how many 'paid caller' entries there are.
+     * @return {number}
+     */
+    static getPaidCount()
+    {
+        // Gets text from paid_count element
+        let count = $('#paid_count').text();
+
+        // Attempt to parce paid_count text into float
+        count = parseFloat(count);
+
+        // Throw error if paid_count text cannot be casted to float
+        if(isNaN(count))
+            console.error("Could not cast paid_count value '" + $('#paid_count').text() + "' to float.");
+        else
+            return count;
+    }
+
+    /**
+     * Sets text in ‘paid_caller_total‘ to value of ‘total’
+     * @float total
+     */
+    static setPaidTotal(total)
+    {
+        if(typeof total === 'number')
+            $('#paid_caller_total').text(total);
+        else
+            // Throw error if total is not a number
+            console.error("Invalid object passed as 'total' parameter. Value passed: '" + total + "' should be a number");
+    }
+
+    /**
+     * Gets the current paid caller total by getting text from element ‘paid_caller_total’ as float.
+     * @return {number}
+     */
+    static getPaidTotal()
+    {
+        // Gets text from paid_caller_total element
+        let total = $('#paid_caller_total').text();
+
+        // Attempt to parce paid_caller_total text into float
+        total = parseFloat(total);
+
+        // Throw error if paid_caller_total text cannot be casted to float
+        if(isNaN(total))
+            console.error("Could not cast paid_caller_total value '" + $('#paid_caller_total').text() + "' to float.");
+        else
+            return total;
+    }
+
+    /**
+     * ‘entries’ contain ‘Pledge‘ structures.
+     *  Sets the values inside ‘paid_list‘ to ‘entries’.
+     *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
+     * @DonorEnum[] entries
+     */
+    static setPaidEntries(entries=[])
+    {
+        // Accumulating html and setting all at once instead of appending 1 after another to avoid weird visual during updates.
+        let tblHtml = "";
+
+        // Add html containing columns with value of all donor's first name, city and amount donated
+        for(let i = 0; i < entries.length; i++)
+        {
+            if(typeof entries[i].firstName !== "string") // Throw error if donor.firstName is not a string
+                console.error("entries[" + i + "].firstName with value '" + entries[i].firstName + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].city !== "string") // Throw error if donor.city is not a string
+                console.error("entries[" + i + "].city with value '" + entries[i].city + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].amtDonated !== "number") // Throw error if donor.amtDonated is not a float
+                console.error("entries[" + i + "].amtDonated with value '" + entries[i].amtDonated + "' is supposed to be 'float' type but isnt");
+            else
+            // Add table row containing [donor.firstName, donor.city, '$' + donor.amtDonated] to tblHtml
+                tblHtml += Pledges._toTableRow([entries[i].firstName, entries[i].city, '$' + entries[i].amtDonated]);
+        }
+
+        // Update paid_list to display tblHtml rows and columns
+        $("#paid_list").html(tblHtml);
+    }
+
+    /**
+     * Sets current paid caller donors being displayed to values inside entries. Updates paid caller total, count,
+     * and entries in table
+     * @DonorEnum[] entries
+     */
+    static updatePaidView(entries=[])
+    {
+        let total = totalDonated(entries);
+
+        Pledges.setPaidEntries(entries);
+        Pledges.setPaidTotal(total);
+        Pledges.setPaidCount(entries.length);
+    }
+
+    /**
+     * Sets text in ‘unpaid_count‘ to value of ‘count’. Sets the amount of unpaid caller entries there are.
+     * @param count
+     */
+    static setUnpaidCount(count)
+    {
+        if(typeof count === 'number')
+            $('#unpaid_count').text(count);
+        else
+            // Throw error if count is not a number
+            console.error("Invalid object passed as 'count' parameter. Value passed: '" + count + "' should be a number");
+    }
+
+    /**
+     * Gets value of ‘unpaid_count’ element. Gets how many 'unpaid caller' entries there are.
+     * @return {number}
+     */
+    static getUnpaidCount()
+    {
+        // Gets text from unpaid_count element
+        let count = $('#unpaid_count').text();
+
+        // Attempt to parce unpaid_count text into float
+        count = parseFloat(count);
+
+        // Throw error if paid_count text cannot be casted to float
+        if(isNaN(count))
+            console.error("Could not cast unpaid_count value '" + $('#unpaid_count').text() + "' to float.");
+        else
+            return count;
+    }
+
+    /**
+     * Sets text in ‘unpaid_caller_total‘ to value of ‘total’
+     * @float total
+     */
+    static setUnpaidTotal(total)
+    {
+        if(typeof total === 'number')
+            $('#unpaid_caller_total').text(total);
+        else
+            // Throw error if total is not a number
+            console.error("Invalid object passed as 'total' parameter. Value passed: '" + total + "' should be a number");
+    }
+
+    /**
+     * Gets the current unpaid caller total by getting text from element ‘unpaid_caller_total’ as float.
+     * @return {number}
+     */
+    static getUnpaidTotal()
+    {
+        // Gets text from unpaid_caller_total element
+        let total = $('#unpaid_caller_total').text();
+
+        // Attempt to parce unpaid_caller_total text into float
+        total = parseFloat(total);
+
+        // Throw error if unpaid_caller_total text cannot be casted to float
+        if(isNaN(total))
+            console.error("Could not cast unpaid_caller_total value '" + $('#unpaid_caller_total').text() + "' to float.");
+        else
+            return total;
+    }
+
+    /**
+     * ‘entries’ contain ‘Pledge‘ structures.
+     *  Sets the values inside ‘unpaid_list‘ to ‘entries’.
+     *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
+     * @DonorEnum[] entries
+     */
+    static setUnpaidEntries(entries=[])
+    {
+        // Accumulating html and setting all at once instead of appending 1 after another to avoid weird visual during updates.
+        let tblHtml = "";
+
+        // Add html containing columns with value of all donor's first name, city and amount donated
+        for(let i = 0; i < entries.length; i++)
+        {
+            if(typeof entries[i].firstName !== "string") // Throw error if donor.firstName is not a string
+                console.error("entries[" + i + "].firstName with value '" + entries[i].firstName + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].city !== "string") // Throw error if donor.city is not a string
+                console.error("entries[" + i + "].city with value '" + entries[i].city + "' is supposed to be 'string' type but isnt");
+            else if(typeof entries[i].amtDonated !== "number") // Throw error if donor.amtDonated is not a float
+                console.error("entries[" + i + "].amtDonated with value '" + entries[i].amtDonated + "' is supposed to be 'float' type but isnt");
+            else
+            // Add table row containing [donor.firstName, donor.city, '$' + donor.amtDonated] to tblHtml
+                tblHtml += Pledges._toTableRow([entries[i].firstName, entries[i].city, '$' + entries[i].amtDonated]);
+        }
+
+        // Update unpaid_list to display tblHtml rows and columns
+        $("#unpaid_list").html(tblHtml);
+    }
+
+    /**
+     * Sets current unpaid caller donors being displayed to values inside entries. Updates unpaid caller total, count,
+     * and entries in table
+     * @DonorEnum[] entries
+     */
+    static updateUnpaidView(entries=[])
+    {
+        let total = totalDonated(entries);
+
+        Pledges.setUnpaidEntries(entries);
+        Pledges.setUnpaidTotal(total);
+        Pledges.setUnpaidCount(entries.length);
+    }
+}
+
+

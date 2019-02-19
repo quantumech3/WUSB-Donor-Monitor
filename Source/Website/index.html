@@ -60,12 +60,12 @@
                         <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Credit card pledges:&nbsp;<span id="credit_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
                         <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
                     </header>
-                    <div class="table-responsive" id="credit_list" style="height: 432px;">
+                    <div class="table-responsive" style="height: 432px;">
                         <table class="table">
                             <thead>
                                 <tr></tr>
                             </thead>
-                            <tbody>
+                            <tbody id="credit_list">
                                 <tr>
                                     <td>Goober</td>
                                     <td>Port jefferson</td>
@@ -83,12 +83,12 @@
                         <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Website pledges:&nbsp;<span id="web_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
                         <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
                     </header>
-                    <div class="table-responsive" id="web_list" style="height: 432px;">
+                    <div class="table-responsive" style="height: 432px;">
                         <table class="table">
                             <thead>
                                 <tr></tr>
                             </thead>
-                            <tbody>
+                            <tbody id="web_list">
                                 <tr>
                                     <td>Goober</td>
                                     <td>Port jefferson</td>
@@ -106,12 +106,12 @@
                         <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Paid callers:&nbsp;<span id="paid_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
                         <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
                     </header>
-                    <div class="table-responsive" id="paid_list" style="height: 432px;">
+                    <div class="table-responsive" style="height: 432px;">
                         <table class="table">
                             <thead>
                                 <tr></tr>
                             </thead>
-                            <tbody>
+                            <tbody id="paid_list">
                                 <tr>
                                     <td>Goober</td>
                                     <td>Port jefferson</td>
@@ -129,12 +129,12 @@
                         <h1 class="text-center" style="font-size: 20px;color: #737373;background-color: rgba(242,242,242,0);padding-right: 0px;">Unpaid callers:&nbsp;<span id="unpaid_count" style="background-color: #ffffff;vertical-align: -4px;padding-bottom: 3px;padding-right: 11px;padding-left: 12px;border-radius: 5px;">123</span></h1>
                         <div><span style="padding-right: 0px;padding-left: 11px;padding-top: 0px;color: #737373;">First name</span><span style="padding-right: 31px;padding-left: 32px;color: #737373;">City</span><span style="color: #737373;">Amount</span></div>
                     </header>
-                    <div class="table-responsive" id="unpaid_list" style="height: 432px;">
+                    <div class="table-responsive" style="height: 432px;">
                         <table class="table">
                             <thead>
                                 <tr></tr>
                             </thead>
-                            <tbody>
+                            <tbody id="unpaid_list">
                                 <tr>
                                     <td>Goober</td>
                                     <td>Port jefferson</td>
@@ -208,12 +208,76 @@
                 'pledgeType': 1,
                 'paidByCredit': 346, //Intentional error test
                 'isPaid': true
+            },
+            {
+                'firstName': "Bob",
+                'city': 'Port Jefferson',
+                'amtDonated': 345667,
+                'pledgeType': 0,
+                'paidByCredit': true,
+                'isPaid': false
+            },
+            {
+                'firstName': "Scott",
+                'city': 'Port Jefferson',
+                'amtDonated': 3434,
+                'pledgeType': 0,
+                'paidByCredit': false,
+                'isPaid': true
+            },
+            {
+                'firstName': "Myers",
+                'city': 'Comsewogue',
+                'amtDonated': 0.1,
+                'pledgeType': 1,
+                'paidByCredit': true,
+                'isPaid': true
+            },
+            {
+                'firstName': "Errortest",
+                'city': 'Narnia',
+                'amtDonated': 987543,
+                'pledgeType': 1,
+                'paidByCredit': 346, //Intentional error test
+                'isPaid': true
+            },
+            {
+                'firstName': "Bob",
+                'city': 'Port Jefferson',
+                'amtDonated': 345667,
+                'pledgeType': 0,
+                'paidByCredit': true,
+                'isPaid': false
+            },
+            {
+                'firstName': "Scott",
+                'city': 'Port Jefferson',
+                'amtDonated': 3434,
+                'pledgeType': 0,
+                'paidByCredit': false,
+                'isPaid': true
+            },
+            {
+                'firstName': "Myers",
+                'city': 'Comsewogue',
+                'amtDonated': 0.1,
+                'pledgeType': 1,
+                'paidByCredit': true,
+                'isPaid': true
+            },
+            {
+                'firstName': "Errortest",
+                'city': 'Narnia',
+                'amtDonated': 987543,
+                'pledgeType': 1,
+                'paidByCredit': 346, //Intentional error test
+                'isPaid': true
             }
-        ]
+        ];
 
-        let total = totalDonated(donors);
+        Pledges.updateUnpaidView(extpUnpaidDonors(donors));
 
-        Goals.setTotal(total)
+
     </script>
 </body>
 
