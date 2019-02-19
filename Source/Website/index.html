@@ -176,7 +176,44 @@
     <script src="assets/js/Page.js"></script>
 
     <script>
+        let donors = [
+            {
+                'firstName': "Bob",
+                'city': 'Port Jefferson',
+                'amtDonated': 345667,
+                'pledgeType': 0,
+                'paidByCredit': true,
+                'isPaid': false
+            },
+            {
+                'firstName': "Scott",
+                'city': 'Port Jefferson',
+                'amtDonated': 3434,
+                'pledgeType': 0,
+                'paidByCredit': false,
+                'isPaid': true
+            },
+            {
+                'firstName': "Myers",
+                'city': 'Comsewogue',
+                'amtDonated': 0.1,
+                'pledgeType': 1,
+                'paidByCredit': true,
+                'isPaid': true
+            },
+            {
+                'firstName': "Errortest",
+                'city': 'Narnia',
+                'amtDonated': 987543,
+                'pledgeType': 1,
+                'paidByCredit': 346, //Intentional error test
+                'isPaid': true
+            }
+        ]
 
+        let total = totalDonated(donors);
+
+        Goals.setTotal(total)
     </script>
 </body>
 

@@ -96,3 +96,154 @@ class Header
     }
 }
 
+/**
+ * Contains methods for manipulating elements in the ‘Goals’ tab
+ */
+class Goals
+{
+    /**
+     * Sets ‘goal_hourly’ element to string version of ‘goal’ with a ‘$’ at the beginning
+     * @number goal
+     * @return void
+     */
+    static setHourly(goal=0.0)
+    {
+        if (typeof goal === "number")
+            $('#goal_hourly').text('$' + goal.toString());
+        else
+            // Throw error if goal is not a number
+            console.error("Invalid object passed as 'goal' parameter. Value passed: '" + goal + "' should be a number");
+    }
+
+    /**
+     * Extrapolates value of ‘goal_hourly’ element without ‘$’ character
+     * @return {number}
+     */
+    static getHourly()
+    {
+        // Get text from 'goal_hourly' element
+        let num = $('#goal_hourly').text();
+
+        // Chop off '$' at beginning of string
+        if(num[0] == '$')
+            num = num.substr(1);
+
+        // Attempt to convert goal_hourly text to float
+        num = parseFloat(num);
+
+        // Throw error if goal_hourly text could not be converted to float
+        if(isNaN(num))
+            console.error("Could not cast goal_hourly value '" + $('#goal_hourly').text() + "' to float.");
+        else
+            return num;
+    }
+
+    /**
+     * Sets ‘goal_daily’ element to string version of ‘goal’ with a ‘$’ at the beginning
+     * @number goal
+     */
+    static setDaily(goal=0.0)
+    {
+        if (typeof goal === "number")
+            $('#goal_daily').text('$' + goal.toString());
+        else
+            // Throw error if goal is not a number
+            console.error("Invalid object passed as 'goal' parameter. Value passed: '" + goal + "' should be a number");
+    }
+
+    /**
+     * Extrapolates value of ‘goal_daily’ element without ‘$’ character
+     * @return {number}
+     */
+    static getDaily()
+    {
+        // Get text from 'goal_daily' element
+        let num = $('#goal_daily').text();
+
+        // Chop off '$' at beginning of string
+        if(num[0] == '$')
+            num = num.substr(1);
+
+        // Attempt to convert goal_daily text to float
+        num = parseFloat(num);
+
+        // Throw error if goal_daily text could not be converted to float
+        if(isNaN(num))
+            console.error("Could not cast goal_daily value '" + $('#goal_daily').text() + "' to float.");
+        else
+            return num;
+    }
+
+    /**
+     * Sets ‘goal_weekly’ element to string version of ‘goal’ with a ‘$’ at the beginning
+     * @number goal
+     */
+    static setWeekly(goal=0.0)
+    {
+        if (typeof goal === "number")
+            $('#goal_weekly').text('$' + goal.toString());
+        else
+            // Throw error if goal is not a number
+            console.error("Invalid object passed as 'goal' parameter. Value passed: '" + goal + "' should be a number");
+    }
+
+    /**
+     * Extrapolates value of ‘goal_weekly’ element without ‘$’ character
+     * @return {number}
+     */
+    static getWeekly()
+    {
+        // Get text from 'goal_weekly' element
+        let num = $('#goal_weekly').text();
+
+        // Chop off '$' at beginning of string
+        if(num[0] == '$')
+            num = num.substr(1);
+
+        // Attempt to convert goal_weekly text to float
+        num = parseFloat(num);
+
+        // Throw error if goal_weekly text could not be converted to float
+        if(isNaN(num))
+            console.error("Could not cast goal_weekly value '" + $('#goal_weekly').text() + "' to float.");
+        else
+            return num;
+    }
+
+    /**
+     * Sets ‘goal_total’ element to string version of ‘goal’ with a ‘$’ at the beginning
+     * @number goal
+     */
+    static setTotal(goal=0.0)
+    {
+        if (typeof goal === "number")
+            $('#goal_total').text('$' + goal.toString());
+        else
+            // Throw error if goal is not a number
+            console.error("Invalid object passed as 'goal' parameter. Value passed: '" + goal + "' should be a number");
+    }
+
+    /**
+     * Extrapolates value of ‘goal_total’ element without ‘$’ character
+     * @return {number}
+     */
+    static getTotal()
+    {
+        // Get text from 'goal_total' element
+        let num = $('#goal_total').text();
+
+        // Chop off '$' at beginning of string
+        if(num[0] == '$')
+            num = num.substr(1);
+
+        // Attempt to convert goal_total text to float
+        num = parseFloat(num);
+
+        // Throw error if goal_total text could not be converted to float
+        if(isNaN(num))
+            console.error("Could not cast goal_total value '" + $('#goal_total').text() + "' to float.");
+        else
+            return num;
+    }
+}
+
