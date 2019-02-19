@@ -344,7 +344,7 @@ class Pledges
      * ‘entries’ contain ‘Pledge‘ structures.
      *  Sets the values inside ‘credit_list‘ to ‘entries’.
      *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static setCreditEntries(entries=[])
     {
@@ -372,7 +372,7 @@ class Pledges
     /**
      * Sets current credit donors being displayed to values inside entries. Updates credit total, count,
      * and entries in table
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static updateCreditView(entries=[])
     {
@@ -451,7 +451,7 @@ class Pledges
      * ‘entries’ contain ‘Pledge‘ structures.
      *  Sets the values inside ‘web_list‘ to ‘entries’.
      *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static setWebEntries(entries=[])
     {
@@ -479,7 +479,7 @@ class Pledges
     /**
      * Sets current web donors being displayed to values inside entries. Updates web total, count,
      * and entries in table
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static updateWebView(entries=[])
     {
@@ -558,7 +558,7 @@ class Pledges
      * ‘entries’ contain ‘Pledge‘ structures.
      *  Sets the values inside ‘paid_list‘ to ‘entries’.
      *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static setPaidEntries(entries=[])
     {
@@ -586,7 +586,7 @@ class Pledges
     /**
      * Sets current paid caller donors being displayed to values inside entries. Updates paid caller total, count,
      * and entries in table
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static updatePaidView(entries=[])
     {
@@ -665,7 +665,7 @@ class Pledges
      * ‘entries’ contain ‘Pledge‘ structures.
      *  Sets the values inside ‘unpaid_list‘ to ‘entries’.
      *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static setUnpaidEntries(entries=[])
     {
@@ -693,7 +693,7 @@ class Pledges
     /**
      * Sets current unpaid caller donors being displayed to values inside entries. Updates unpaid caller total, count,
      * and entries in table
-     * @DonorEnum[] entries
+     * @PledgeEnum[] entries
      */
     static updateUnpaidView(entries=[])
     {
@@ -705,4 +705,149 @@ class Pledges
     }
 }
 
+class RecentDonor
+{
+    /**
+     * Sets element ‘recent_name’ to ‘name’
+     * @string name
+     */
+    static setName(name)
+    {
+        $('#recent_name').text(name);
+    }
 
+    /**
+     * Gets value of element ‘recent_name‘
+     * @return {string}
+     */
+    static getName()
+    {
+        return $('#recent_name').text();
+    }
+
+    /**
+     * Sets element ‘recent_amt’ to value of ‘amt’ plus a ‘$’ character
+     * @float amt
+     */
+    static setAmtDonated(amt)
+    {
+        if(typeof amt === 'number')
+            $('#recent_amt').text('$' + amt.toString());
+        else
+            console.error("Parameter 'amt' with value '" + amt + "' is supposed to be type 'float' but isn't");
+    }
+
+    /**
+     * Gets value of element ‘recent_amt‘ minus the ‘$’ character
+     * @return {number}
+     */
+    static getAmtDonated()
+    {
+        // Get text from 'recent_amt' element
+        let num = $('#recent_amt').text();
+
+        // Chop off '$' at beginning of string
+        if(num[0] == '$')
+            num = num.substr(1);
+
+        // Attempt to convert 'recent_amt' text to float
+        num = parseFloat(num);
+
+        // Throw error if 'recent_amt' text could not be converted to float
+        if(isNaN(num))
+            console.error("Could not cast recent_amt value '" + $('#recent_amt').text() + "' to float.");
+        else
+            return num;
+    }
+
+    /**
+     * Sets the most recent donor and displays it on the page.
+     * @PledgeEnum donor
+     */
+    static setDonor(donor)
+    {
+        if(typeof donor.firstName === 'string')
+            RecentDonor.setName(donor.firstName);
+        else
+            // Throw error if donor.firstName is not of type 'string'
+            console.error("donor.firstName with value '" + donor.firstName + "' is supposed to be type 'string' but isnt");
+
+        if(typeof donor.amtDonated === 'number')
+            RecentDonor.setAmtDonated(donor.amtDonated);
+        else
+            // Throw error if donor.firstName is not of type 'number'
+            console.error("donor.amtDonated with value '" + donor.amtDonated + "' is supposed to be type 'number' but isnt");
+    }
+}
+
+/**
+ * Contains methods for setting and getting the ‘paid_total‘ and ‘full_total’ HTML elements
+ */
+class Totals
+{
+    /**
+     * This sets the ‘paid_total’ HTML element to the sum of all the donors[n].amtDonated values
+     * @PledgeEnum[] donors
+     */
+    static setPaidTotal(donors=[])
+    {
+        // Setting float precision to prevent astronomically large numbers (which would not look good on a webpage)
+        $('#paid_total').text('$' + totalDonated(donors).toPrecision(10));
+    }
+
+    /**
+     * This gets the value of ‘paid_total’ HTML element
+     * @return {number}
+     */
+    static getPaidTotal()
+    {
+        // Get text from 'paid_total' element
+        let total = $('#paid_total').text();
+
+        // Get rid of '$' at beginning of string
+        if(total[0] === '$')
+            total = total.substr(1);
+
+        // Attempt to cast 'total' to number
+        total = parseFloat(total);
+
+        // Throw error if 'total' is non-numeric
+        if(isNaN(total))
+            console.error("Cannot convert value from paid_total '" + $('#paid_total').text() + "' to number.");
+        else
+            return total;
+    }
+
+    /**
+     * This sets the ‘full_total’ HTML element to the sum of all the donors[n].amtDonated values with a ‘$’ at the beginning
+     * @PledgeEnum[] donors
+     */
+    static setFullTotal(donors)
+    {
+        // Setting float precision to prevent astronomically large numbers (which would not look good on a webpage)
+        $('#full_total').text('$' + totalDonated(donors).toPrecision(10));
+    }
+
+    /**
+     * This gets the value of ‘full_total’ HTML element
+     * @return {number}
+     */
+    static getFullTotal()
+    {
+        // Get text from 'full_total' element
+        let total = $('#full_total').text();
+
+        // Get rid of '$' at beginning of string
+        if(total[0] === '$')
+            total = total.substr(1);
+
+        // Attempt to cast 'total' to number
+        total = parseFloat(total);
+
+        // Throw error if 'total' is non-numeric
+        if(isNaN(total))
+            console.error("Cannot convert value from full_total '" + $('#full_total').text() + "' to number.");
+        else
+            return total;
+    }
+}
