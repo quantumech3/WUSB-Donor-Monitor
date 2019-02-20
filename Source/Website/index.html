@@ -176,112 +176,42 @@
     <script src="assets/js/Page.js"></script>
 
     <script>
-        let donors = [
-            {
-                'firstName': "Bob",
-                'city': 'Port Jefferson',
-                'amtDonated': 345667,
-                'pledgeType': 0,
-                'paidByCredit': true,
-                'isPaid': false
-            },
-            {
-                'firstName': "Scott",
-                'city': 'Port Jefferson',
-                'amtDonated': 3434,
-                'pledgeType': 0,
-                'paidByCredit': false,
-                'isPaid': true
-            },
-            {
-                'firstName': "Myers",
-                'city': 'Comsewogue',
-                'amtDonated': 0.1,
-                'pledgeType': 1,
-                'paidByCredit': true,
-                'isPaid': true
-            },
-            {
-                'firstName': "Errortest",
-                'city': 'Narnia',
-                'amtDonated': 987543,
-                'pledgeType': 1,
-                'paidByCredit': 346, //Intentional error test
-                'isPaid': true
-            },
-            {
-                'firstName': "Bob",
-                'city': 'Port Jefferson',
-                'amtDonated': 345667,
-                'pledgeType': 0,
-                'paidByCredit': true,
-                'isPaid': false
-            },
-            {
-                'firstName': "Scott",
-                'city': 'Port Jefferson',
-                'amtDonated': 3434,
-                'pledgeType': 0,
-                'paidByCredit': false,
-                'isPaid': true
-            },
-            {
-                'firstName': "Myers",
-                'city': 'Comsewogue',
-                'amtDonated': 0.1,
-                'pledgeType': 1,
-                'paidByCredit': true,
-                'isPaid': true
-            },
-            {
-                'firstName': "Errortest",
-                'city': 'Narnia',
-                'amtDonated': 987543,
-                'pledgeType': 1,
-                'paidByCredit': 346, //Intentional error test
-                'isPaid': true
-            },
-            {
-                'firstName': "Bob",
-                'city': 'Port Jefferson',
-                'amtDonated': 345667,
-                'pledgeType': 0,
-                'paidByCredit': true,
-                'isPaid': false
-            },
-            {
-                'firstName': "Scott",
-                'city': 'Port Jefferson',
-                'amtDonated': 3434,
-                'pledgeType': 0,
-                'paidByCredit': false,
-                'isPaid': true
-            },
-            {
-                'firstName': "Myers",
-                'city': 'Comsewogue',
-                'amtDonated': 0.1,
-                'pledgeType': 1,
-                'paidByCredit': true,
-                'isPaid': true
-            },
-            {
-                'firstName': "Errortest",
-                'city': 'Narnia',
-                'amtDonated': 987543,
-                'pledgeType': 1,
-                'paidByCredit': 346, //Intentional error test
-                'isPaid': true
-            }
-        ];
 
-        Pledges.updateUnpaidView(extpUnpaidDonors(donors));
 
-        RecentDonor.setDonor(donors[4]);
-        Totals.setFullTotal(donors);
+        /**
+         * Updates all dynamic elements of page excluding ‘time_left’.
+         * @RadiothonInfoEnum data
+         */
+        function updatePage(radiothonInfo)
+        {
+            // Set radiothon name
+            Header.setRadiothonName(radiothonInfo.name);
 
-        $('#paid_total').text("SDffsd")
-        Totals.getPaidTotal()
+            // Set start date and end date
+            Header.setStartDate(new Date(radiothonInfo.startDate));
+            Header.setEndDate(new Date(radiothonInfo.endDate));
+
+            // Set goals
+            Goals.setHourly(radiothonInfo.goalHourly);
+            Goals.setDaily(radiothonInfo.goalDaily);
+            Goals.setWeekly(radiothonInfo.goalWeekly);
+            Goals.setTotal(radiothonInfo.goalTotal);
+
+            // Set pledge views
+            Pledges.updateCreditView(extpCreditDonors(radiothonInfo.pledges));
+            Pledges.updateWebView(extpWebDonors(radiothonInfo.pledges));
+            Pledges.updatePaidView(extpPaidDonors(extpCallDonors(radiothonInfo.pledges)));
+            Pledges.updateUnpaidView(extpUnpaidDonors(extpCallDonors(radiothonInfo.pledges)));
+
+            // Set most recent donor information
+            RecentDonor.setDonor(radiothonInfo.pledges[radiothonInfo.pledges.length - 1]);
+
+            // Set 'totals' information
+            Totals.setPaidTotal(extpPaidDonors(radiothonInfo.pledges));
+            Totals.setFullTotal(radiothonInfo.pledges);
+        }
+
+        
 
     </script>
 </body>
