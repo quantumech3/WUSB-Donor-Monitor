@@ -174,6 +174,7 @@
     <script src="assets/js/Debug.js"></script>
     <script src="assets/js/Deduct.js"></script>
     <script src="assets/js/Page.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 
     <script>
 
@@ -184,6 +185,8 @@
          */
         function updatePage(radiothonInfo)
         {
+            dbgMsg("Attempting to update webpage");
+
             // Set radiothon name
             Header.setRadiothonName(radiothonInfo.name);
 
@@ -209,9 +212,51 @@
             // Set 'totals' information
             Totals.setPaidTotal(extpPaidDonors(radiothonInfo.pledges));
             Totals.setFullTotal(radiothonInfo.pledges);
+
+            dbgMsg("Web page update successful!")
         }
 
-        
+        /**
+         * Called when client connect to SocketIO server.
+         */
+        function onSocketConnect()
+        {
+            dbgMsg("Successfully connected to SocketIO server!");
+
+            // Handle when server sends a RadiothonInfo data structure to client
+            socket.on('pageData', function(data)
+            {
+                dbgMsg("Received 'pageData' event from SocketIO server");
+                updatePage(data);
+            });
+        }
+
+        // SERVER_URL points back to server hosting the page
+        const SERVER_URL = 'http://' + document.domain + ':' + location.port;
+
+        // Initialize SocketIO connection with server hosting webpage
+        dbgMsg("Connecting to SocketIO server at " + SERVER_URL);
+        let socket = io.connect(SERVER_URL);
+        socket.on('connect', onSocketConnect);
+
+        // Update 'time_left' element countdown every 0.5 seconds.
+        setInterval(function()
+        {
+            // Get end date of radiothon
+            let endDate = Header.getEndDate();
+
+            // If endDate is set then set timeDifference to a string containing the difference between endDate and currTime
+            if(typeof endDate === 'object')
+            {
+                // Get time difference between endDate and now as string
+                let timeDifference = new Date(endDate - Date.now()).toLocaleTimeString();
+
+                // Cut out the ' PM' part of the string
+                timeDifference = timeDifference.substr(0, timeDifference.length - 3);
+
+                $('#time_left').text(timeDifference);
+            }
+        }, 500)
 
     </script>
 </body>
