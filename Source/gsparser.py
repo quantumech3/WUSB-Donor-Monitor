@@ -10,6 +10,7 @@ Module description:
 
 import debug as dbg
 
+
 def find(key, vals=[], keys=[]):
     '''
     Searches through ‘keys’ for value ‘key’ kind of like a dictionary and either returns the value in ‘vals’ associated with it,
@@ -34,6 +35,13 @@ def find(key, vals=[], keys=[]):
 
 
 def to_Donor(row=[], head=[]):
+    '''
+    Turns a donor entry row from a GSheets document into a ‘Donor’ data structure.
+
+    :param row:
+    :param head:
+    :return: DonorDict
+    '''
 
     def lex(row=[], head=[]):
         '''
@@ -148,3 +156,26 @@ def to_Donor(row=[], head=[]):
     pledge = parce(pledge)
 
     return pledge
+
+
+def to_RadiothonInfo(donors=[], config={}):
+    '''
+    Given a list of ‘Donor’ data structures and a ‘serverConfig’ data structure,
+    this method returns a ‘RadiothonInfo’ data structure.
+
+    :param donors: PledgeDict
+    :param config: ConfigDict
+    :return: RadiothonInfoDict
+    '''
+
+    return \
+    {
+        'name': config["radiothon"]["name"],
+        'startDate': config["radiothon"]["start_date"],
+        'endDate': config["radiothon"]["end_date"],
+        'goalHourly': config["radiothon"]["goal"]["hourly"],
+        'goalDaily': config["radiothon"]["goal"]["daily"],
+        'goalWeekly': config["radiothon"]["goal"]["weekly"],
+        'goalTotal': config["radiothon"]["goal"]["total"],
+        'pledges': donors
+    }
