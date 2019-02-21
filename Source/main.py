@@ -10,21 +10,18 @@ Module description:
 '''
 
 import pickle
-from database import Database
 import json
-import gsparser
+import poller
+import threading
+from time import sleep
 
 creds = pickle.load(open('./creds.pickle', 'rb'))
-
-database = Database("14xbkoqICLY-rcWnAOSJrLQkprKUJueQvZ4vkWfan-fI", 0, creds)
-
-donors = []
-
-for i in range(6):
-    donors.append(gsparser.to_Donor(database.get_row(1 + i), database.get_row(0)))
 
 config = {}
 
 with open("../server_config.json", 'r') as file:
     config = json.load(file)
 
+t1 = threading.Thread(target=poller.main, args=[creds])
+
+t1.start()

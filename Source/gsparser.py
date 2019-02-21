@@ -34,13 +34,13 @@ def find(key, vals=[], keys=[]):
         return None
 
 
-def to_Donor(row=[], head=[]):
+def to_Pledge(row=[], head=[]):
     '''
-    Turns a donor entry row from a GSheets document into a ‘Donor’ data structure.
+    Turns a pledge entry row from a GSheets document into a ‘Pledge’ data structure.
 
     :param row:
     :param head:
-    :return: DonorDict
+    :return: PledgeDict
     '''
 
     def lex(row=[], head=[]):
@@ -87,6 +87,7 @@ def to_Donor(row=[], head=[]):
             :param string:
             :return:
             '''
+
             if string is None:
                 return "N/A"
             elif string in ["", "*", ","]:
@@ -102,7 +103,9 @@ def to_Donor(row=[], head=[]):
             :return:
             '''
 
-            if string.capitalize() in ["YES", "TRUE", "T", "Y"]:
+            if string is None:
+                return False
+            elif string.capitalize() in ["YES", "TRUE", "T", "Y"]:
                 return True
             return False
 
@@ -140,8 +143,10 @@ def to_Donor(row=[], head=[]):
         else:
             pledge["amtDonated"] = dollar_to_float(pledge["amtDonated"])
 
-        # If pledge is caller pledge, make pledgeType make it Caller, else website
-        if pledge["pledgeType"].capitalize() == "Caller":
+        # If pledge is caller pledge, make pledgeType Caller, else website
+        if pledge["pledgeType"] is None:
+            pledge["pledgeType"] = 0
+        elif pledge["pledgeType"].capitalize() == "Caller":
             pledge["pledgeType"] = 1
         else:
             pledge["pledgeType"] = 0

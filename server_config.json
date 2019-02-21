@@ -13,8 +13,8 @@
 	}, 
 
 	"gsheets": {
-		"doc_ID": "id goes here", 
+		"doc_ID": "14xbkoqICLY-rcWnAOSJrLQkprKUJueQvZ4vkWfan-fI", 
 		"wsheet_ID": 0, 
-		"poll_interval": 0.1
+		"poll_interval": 0.6
 	}
 }
