@@ -46,7 +46,6 @@ def update_radiothonInfo():
 
     # Update config
     dbg.log("Attempting to update server config status")
-
     update_config_status()
 
     # Log success
@@ -74,7 +73,7 @@ def update_radiothonInfo():
     radiothonInfo = gsparser.to_RadiothonInfo(pledges, config)
 
     # Log radiothonInfo update attempt success
-    dbg.log("Server status update successful (poller.radiothonInfo updated)")
+    dbg.success("Server status update successful (poller.radiothonInfo updated)")
 
 def update_config_status():
     '''
