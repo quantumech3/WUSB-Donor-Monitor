@@ -3,7 +3,7 @@
 Created by Scott Burgert on 2/20/2019
 Project name: WUSB Donor Monitor ©
 
-Module name: <insert module name here>
+Module name: poller.py
 Module description:
         This module runs on an independant daemon thread.
         This module has an entry point that is called by the ‘main.py’ module.
