@@ -14,7 +14,7 @@ from database import Database
 import json
 import gsparser
 
-creds = pickle.load(open('creds.pickle', 'rb'))
+creds = pickle.load(open('./creds.pickle', 'rb'))
 
 database = Database("14xbkoqICLY-rcWnAOSJrLQkprKUJueQvZ4vkWfan-fI", 0, creds)
 
@@ -28,4 +28,3 @@ config = {}
 with open("../server_config.json", 'r') as file:
     config = json.load(file)
 
-print(gsparser.to_RadiothonInfo(donors, config))

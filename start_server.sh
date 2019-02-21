@@ -1,1 +1,2 @@
-sudo python3 ./Source/main.py
+cd ./Source/
+sudo python3 main.py
