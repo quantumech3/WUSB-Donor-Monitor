@@ -27,7 +27,7 @@ elif sys.version_info[0] == 3 and sys.version_info[1] < 6:
 elif sys.version_info[0] > 3 or sys.version_info[1] > 6:
     print("Warning: This program was built and tested on Python 3.6 but you are running Python " + str(sys.version_info[0]) + '.' + str(sys.version_info[1]))
     print("Server will probably still work but it is recommended that you run this server on Python 3.6.")
-    input("Press any key to continue...")
+    input("Press any key to start server...")
 
 
 from time import sleep
@@ -37,7 +37,13 @@ import poller
 import host
 import cmd
 import pickle
+import logging
 
+
+# Silence external logging if VERBOSE is false
+if not dbg.VERBOSE:
+    # Mute all logging from all external modules (mutes all logging up to level 'fatal' for everything)
+    logging.basicConfig(level=logging.FATAL)
 
 # Print copyright message
 print("\nStarting the WUSB Donor Monitor server. This and the client-side part of this application were written and developed by Scott Burgert in 2019 (copyright) \n" +

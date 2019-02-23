@@ -21,11 +21,6 @@ from time import sleep
 import threading
 import os
 
-# TODO: Make main.py silence external logging instead of host.py
-if not dbg.VERBOSE:
-    # Mute all logging from all external modules (mutes all logging up to level 'fatal' for everything)
-    logging.basicConfig(level=logging.FATAL)
-
 # Instantiate Flask HTTP server
 http = Flask(__name__)
 

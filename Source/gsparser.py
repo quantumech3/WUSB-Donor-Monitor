@@ -138,7 +138,6 @@ def to_Pledge(row=[], head=[]):
         pledge["city"] = subst_blank_chars_with_NA(pledge["city"])
 
         # Parse amtDonated to float if exists, else default to 0$
-        # TODO: See if this None comparison can be excluded since dollar_to_float() already does the comparison
         if pledge["amtDonated"] is None:
             pledge["amtDonated"] = 0
         else:

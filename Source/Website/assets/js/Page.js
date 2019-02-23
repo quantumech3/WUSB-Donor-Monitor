@@ -8,6 +8,7 @@ Module description:
         Updates elements in page using JQuery
 */
 
+
 /**
  * Contains static methods for manipulating the red header on the top of the page
  */
@@ -217,7 +218,11 @@ class Goals
     static setTotal(goal=0.0)
     {
         if (typeof goal === "number")
-            $('#goal_total').text('$' + goal.toString());
+        {
+            // Create string containing '$<goal>' (goal variable value is in front of dollar sign)
+            let goalStr = '$' + goal.toString();
+            $('#goal_total').text(goalStr);
+        }
         else
             // Throw error if goal is not a number
             console.error("Invalid object passed as 'goal' parameter. Value passed: '" + goal + "' should be a number");
@@ -791,8 +796,8 @@ class Totals
      */
     static setPaidTotal(donors=[])
     {
-        // Setting float precision to prevent astronomically large numbers (which would not look good on a webpage)
-        $('#paid_total').text('$' + totalDonated(donors).toPrecision(10));
+        // Set 'paid_total' HTML element to string representation of donor total
+        $('#paid_total').text('$' + totalDonated(donors).toString());
     }
 
     /**
@@ -824,8 +829,8 @@ class Totals
      */
     static setFullTotal(donors)
     {
-        // Setting float precision to prevent astronomically large numbers (which would not look good on a webpage)
-        $('#full_total').text('$' + totalDonated(donors).toPrecision(10));
+        // Set 'full_total' HTML element to string representation of donor total
+        $('#full_total').text('$' + totalDonated(donors).toString());
     }
 
     /**
