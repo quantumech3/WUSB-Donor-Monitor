@@ -1,13 +1,13 @@
 {
 	"radiothon": {
 		"goal": {
-			"hourly": 0, 
-			"daily": 0, 
-			"weekly": 0, 
-			"total": 0
+			"hourly": 100, 
+			"daily": 100, 
+			"weekly": 100, 
+			"total": 100
 		}, 
 
-		"name": "radiothonName", 
+		"name": "Radiothon j here", 
 		"start_date": "1/1/1", 
 		"end_date": "2/2/1"
 	}, 

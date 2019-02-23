@@ -14,6 +14,7 @@ import json
 import poller
 import threading
 from time import sleep
+import host
 
 creds = pickle.load(open('./creds.pickle', 'rb'))
 
@@ -23,5 +24,7 @@ with open("../server_config.json", 'r') as file:
     config = json.load(file)
 
 t1 = threading.Thread(target=poller.main, args=[creds])
+t2 = threading.Thread(target=host.main)
 
 t1.start()
+t2.start()
