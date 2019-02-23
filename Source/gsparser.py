@@ -105,7 +105,7 @@ def to_Pledge(row=[], head=[]):
 
             if string is None:
                 return False
-            elif string.capitalize() in ["YES", "TRUE", "T", "Y"]:
+            elif string.lower() in ["yes", "true", "t", "y"]:
                 return True
             return False
 
@@ -126,7 +126,7 @@ def to_Pledge(row=[], head=[]):
             # Turns list back into string
             string = "".join(string)
 
-            # If string didnt contain any numeric chars, return 0 dollars
+            # If string didn't contain any numeric chars, return 0 dollars
             if string == "":
                 return 0
 
