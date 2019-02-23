@@ -11,7 +11,8 @@ Module description:
     recognize them as events.
 '''
 
-
+import logging
+import eventlet
 from flask import Flask, send_from_directory
 from flask_socketio import SocketIO
 import debug as dbg
@@ -19,11 +20,16 @@ import poller
 from time import sleep
 import threading
 
+# TODO: Make main.py silence external logging instead of host.py
+if not dbg.VERBOSE:
+    # Mute all logging from all external modules (mutes all logging up to level 'fatal' for everything)
+    logging.basicConfig(level=logging.FATAL)
+
 # Instantiate Flask HTTP server
 http = Flask(__name__)
-# Instantiate SocketIO server
-socket = SocketIO(http)
 
+# Instantiate SocketIO server with 'threading' mode enabled.
+socket = SocketIO(http, async_mode='threading')
 
 def emit_pageData():
     '''
@@ -116,7 +122,6 @@ def main():
 
         emit_pageData()
 
-
     # Attempt to start server on port 80
     try:
         # Start server
@@ -136,8 +141,8 @@ def main():
         # Send pageData event and 'radiothonInfo' data structure to client
         emit_pageData()
 
-        # If poll_interval configuration exists in poller.config and poller.config exists
-        if poller.config['gsheets']['poll_interval'] is not None:
+        # If poller.config exists
+        if poller.config['gsheets'] is not None:
             # Sleep for however long was specified in config
             sleep(poller.config['gsheets']['poll_interval'] * 60)
         # Else sleep for a second and try to emit pageData event again
