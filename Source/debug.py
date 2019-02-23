@@ -21,7 +21,7 @@ def success(msg):
     '''
     if VERBOSE:
         # Print green message
-        print("\u001b[32m" + "SUCCESS[]: " + msg + "\u001b[0m")
+        print("\n\u001b[32m" + "SUCCESS[]: " + msg + "\u001b[0m")
 
 
 def warn(msg):
@@ -32,7 +32,7 @@ def warn(msg):
     '''
     if VERBOSE:
         # Print yellow message
-        print("\u001b[33m" + "WARN[]: " + msg + "\u001b[0m")
+        print("\n\u001b[33m" + "WARN[]: " + msg + "\u001b[0m")
 
 
 def err(msg):
@@ -42,7 +42,7 @@ def err(msg):
     :return:
     '''
     # Print red message
-    print("\u001b[31m" + "ERROR[]: " + msg + "\u001b[0m")
+    print("\n\u001b[31m" + "ERROR[]: " + msg + "\u001b[0m")
 
 
 def log(msg):
@@ -53,4 +53,4 @@ def log(msg):
     '''
 
     if VERBOSE:
-        print('LOG[]: ' + msg)
+        print('\nLOG[]: ' + msg)

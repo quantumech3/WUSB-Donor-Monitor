@@ -11,7 +11,8 @@ Module description:
 '''
 
 from time import sleep
-
+import poller
+import host
 
 def exit_cmd():
     '''
@@ -46,6 +47,24 @@ def refresh_cmd():
     Refresh command
     '''
 
+    # Tell user that Radiothon information is being updated
+    print("Reading new Radiothon information from Google Sheets and config file...")
+
+    # Get copy of radiothonInfo to compare against
+    _radiothonInfo = poller.radiothonInfo
+
+    # Update radiothonInfo state
+    poller.update_radiothonInfo()
+
+    # Tell user that new information is being sent to clients
+    print("Sending new Radiothon information to clients...")
+
+    # Emit pageData event
+    host.emit_pageData()
+
+    # Log success
+    print("Successfully refreshed!")
+
 def unknown_cmd():
     print("What does that mean? I don’t understand that!")
 
@@ -66,6 +85,6 @@ def main():
         if inpt == 'exit':
             exit_cmd()
         elif inpt == 'refresh':
-            print("This command has not been implemented yet!") # TODO: Make refresh command after main.py module is done
+            refresh_cmd()
         elif inpt != '':
             unknown_cmd()  # Run default 'unknown' command if user entered something (not a blank string)
