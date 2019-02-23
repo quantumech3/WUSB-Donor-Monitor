@@ -102,12 +102,12 @@ def main():
         # Attempt to send homepage to client
         dbg.log("Attempting to send './Website/" + path + "' to clients")
 
-        # Test if ./Website/<path> exists. Throw error if it doesn't.
+        # Test if ./Website/<path> exists. Throw warning if it doesn't.
         # Wont exit because something like 'favicon.ico' might not be integral to the application
         try:
             open('./Website/' + path, 'r')
         except FileNotFoundError:
-            dbg.err("Failed to send file './Website/" + path + "' to clients . File does not exist.")
+            dbg.warn("Failed to send file './Website/" + path + "' to clients . File does not exist.")
 
         # Send html to client
         html = send_from_directory('./Website/', path)
