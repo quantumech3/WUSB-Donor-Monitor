@@ -17,6 +17,7 @@ from time import sleep
 import threading
 import debug as dbg
 import json
+import os
 
 # This variable gets set by the command line module when ‘reload’ command is called and on startup.
 # This variable is a ‘server_config’ data structure.
@@ -90,10 +91,12 @@ def update_config_status():
     except FileNotFoundError:
         dbg.err(
             "Could not read server config because server_config.json does not exist. server_config.json must be in project's root directory.")
+        input("Cannot continue. Press any key to exit")
+        os._exit(-1)
 
 def main(creds=0):
     '''
-    Entrypoint for poller.py module
+    Entry point for poller.py module
 
     :param server_config:
     :param creds:

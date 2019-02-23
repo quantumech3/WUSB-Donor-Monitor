@@ -51,7 +51,7 @@ def unknown_cmd():
 
 def main():
     '''
-    Main entry point for cmd.py module
+    Entry point for cmd.py module
     '''
 
     # Prompt user for input continuously

@@ -19,6 +19,7 @@ import debug as dbg
 import poller
 from time import sleep
 import threading
+import os
 
 # TODO: Make main.py silence external logging instead of host.py
 if not dbg.VERBOSE:
@@ -51,7 +52,7 @@ def emit_pageData():
 
 def main():
     '''
-    Main entry point for host.py module
+    Entry point for host.py module
     :return: void
     '''
 
@@ -84,7 +85,7 @@ def main():
         except FileNotFoundError:
             dbg.err("Failed to send homepage to client because './Website/index.html' does not exist.")
             input("Server cannot run without homepage... Press any key to exit.")
-            exit(-1)
+            os._exit(-1)
 
         # Send html to client
         html = send_from_directory('./Website/', 'index.html')
@@ -134,7 +135,7 @@ def main():
     except Exception as e:
         dbg.err("Failed to start SocketIO/HTTP server on address '" + ADDRESS + ":" + str(PORT) + "'. Flask threw the following error: \n" + str(e))
         print("Cannot continue. Press any key to exit.")
-        exit(-1)
+        os._exit(-1)
 
     # Periodically send 'pageData' event to client at interval specified in config
     while True:

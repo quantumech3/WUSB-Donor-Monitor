@@ -13,6 +13,7 @@ import gspread
 from gspread import exceptions as gs_exceptions
 from oauth2client.service_account import ServiceAccountCredentials
 import debug as dbg
+import os
 
 class Database:
     '''
@@ -79,18 +80,18 @@ class Database:
                     "Didn't have permissions to read Google Sheets document. " +
                     "Please make document public or create a shareable link to it.")
                 input("Press any key to exit...")
-                exit(-1)
+                os._exit(-1)
             # Throw error and exit if document does not exist
             elif e.response.json()['error']['code'] == 404:
                 dbg.err("Tried to read Google Sheets document, but the document does not exist.")
                 input("Press any key to exit...")
-                exit(-1)
+                os._exit(-1)
             # Throw error and exit if any other bad response is received
             else:
                 dbg.err("Tried to read Google Sheets document, but got the following error response instead:")
                 dbg.err(e.response.text)
                 input("Press any key to exit...")
-                exit(-1)
+                os._exit(-1)
 
     def get_cell(self, x=0, y=0):
         '''
