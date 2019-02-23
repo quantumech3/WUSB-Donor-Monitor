@@ -141,8 +141,8 @@ def main():
         # Send pageData event and 'radiothonInfo' data structure to client
         emit_pageData()
 
-        # If poller.config exists
-        if poller.config['gsheets'] is not None:
+        # If poller.config has been set
+        if poller.config != {}:
             # Sleep for however long was specified in config
             sleep(poller.config['gsheets']['poll_interval'] * 60)
         # Else sleep for a second and try to emit pageData event again
