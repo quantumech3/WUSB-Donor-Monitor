@@ -47,7 +47,6 @@ def update_radiothonInfo():
 
     # Attempt to refresh GAPI credentials (Needed otherwise Google will not accept requests after a certain period of time)
     dbg.log("Attempting to refresh GAPI credentials")
-    database.creds.login()
     database.gs.login()
     dbg.success("Successfully refreshed GAPI credentials")
 
