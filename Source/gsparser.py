@@ -34,6 +34,24 @@ def find(key, vals=[], keys=[]):
         return None
 
 
+def is_float(val=''):
+    '''
+    Returns true if the val can be converted into a float. Else returns false
+    :return: Boolean
+    '''
+
+    # If casting param 'string' to float works, return true
+    try:
+        float(val)
+        return True
+    # If casting doesnt work, return false
+    except ValueError:
+        return False
+    # If value was not of type int, float or string, throw error
+    except TypeError as e:
+        dbg.err("gsparser.is_float() got passed non-string value '" + str(val) + "' as param 'string'.\n" + "Stack trace is as follows: \n" + str(e))
+
+
 def to_Pledge(row=[], head=[]):
     '''
     Turns a pledge entry row from a GSheets document into a ‘Pledge’ data structure.
@@ -120,8 +138,8 @@ def to_Pledge(row=[], head=[]):
             if string is None:
                 return 0
 
-            # Get list version of string without numeric chars
-            string = [i for i in string if i.isnumeric()]
+            # Get list version of string without dollar sign
+            string = [i for i in string if i != '$']
 
             # Turns list back into string
             string = "".join(string)
@@ -130,8 +148,12 @@ def to_Pledge(row=[], head=[]):
             if string == "":
                 return 0
 
-            # Return float version of parsed number
-            return float("".join(string))
+            # Return float version of parsed number if number is numeric
+            if is_float(string):
+                return float("".join(string))
+            # Else return 0
+            else:
+                return 0
 
         # Process strings
         pledge["firstName"] = subst_blank_chars_with_NA(pledge["firstName"])
