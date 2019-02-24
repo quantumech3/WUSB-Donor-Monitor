@@ -45,6 +45,11 @@ def update_radiothonInfo():
     global database
     global config
 
+    # Attempt to refresh GAPI credentials (Needed otherwise Google will not accept requests after a certain period of time)
+    dbg.log("Attempting to refresh GAPI credentials")
+    database.gs.login()
+    dbg.success("Successfully refreshed GAPI credentials")
+
     # Update config
     dbg.log("Attempting to update server config status")
     update_config_status()
@@ -75,6 +80,7 @@ def update_radiothonInfo():
 
     # Log radiothonInfo update attempt success
     dbg.success("Server status update successful (poller.radiothonInfo updated)")
+
 
 def update_config_status():
     '''

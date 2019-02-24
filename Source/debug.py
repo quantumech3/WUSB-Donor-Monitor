@@ -10,7 +10,7 @@ Module description:
 '''
 
 # Hard coded constant. if true, status, log and warning messages will show in console
-VERBOSE = False
+VERBOSE = True
 
 
 def success(msg):
