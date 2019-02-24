@@ -169,7 +169,7 @@ def to_Pledge(row=[], head=[]):
             '''
 
             # Return 0 if number was not specified
-            if string is None:
+            if string is None or string == '':
                 return 0
 
             # Get list version of string without dollar sign
