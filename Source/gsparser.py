@@ -40,16 +40,30 @@ def is_float(val=''):
     :return: Boolean
     '''
 
-    # If casting param 'string' to float works, return true
-    try:
-        float(val)
-        return True
-    # If casting doesnt work, return false
-    except ValueError:
-        return False
-    # If value was not of type int, float or string, throw error
-    except TypeError as e:
-        dbg.err("gsparser.is_float() got passed non-string value '" + str(val) + "' as param 'string'.\n" + "Stack trace is as follows: \n" + str(e))
+    # If 'val' is a string, iterate through each element and return false at the first non-numeric/non-decimal character
+    if type(val) == str:
+
+        # True when decimal point is found. Used to determine when there is more then 1 decimal point (which means it isn't a float)
+        found_deci = False
+
+        for i in val:
+            if i == '.':
+                # If a decimal point was found already, return false because '1.2.3' is not a valid float/number
+                if found_deci:
+                    return False
+                found_deci = True
+
+            # Else if character is not a decimal point or is numeric, return false
+            elif not i.isnumeric():
+                return False
+
+    # Else if val is not an int or a float, return false
+    else:
+        if type(val) not in [float, int]:
+            return False
+
+    # Return true if all tests are passed
+    return True
 
 
 def to_Pledge(row=[], head=[]):
