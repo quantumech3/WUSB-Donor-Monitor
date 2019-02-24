@@ -130,7 +130,7 @@ def to_Pledge(row=[], head=[]):
 
             if string is None:
                 return "N/A"
-            elif string in ["", "*", ","]:
+            elif string in ["", "*", ",", " "]:
                 return "N/A"
 
             # Just return the normal string if it actually contains a value
@@ -142,6 +142,13 @@ def to_Pledge(row=[], head=[]):
             :param string:
             :return:
             '''
+
+            # Slice out all spaces before first non-space char
+            while string[0] == ' ':
+                string = string[1: len(string)]
+            # Slice out all spaces after last non-space char
+            while string[-1] == ' ':
+                string = string[0: len(string) - 1]
 
             if string is None:
                 return False
