@@ -226,6 +226,14 @@ class Database:
 
         return data
 
+    def get_all_vals(self):
+        '''
+        Returns all values from every cell in linked Google Sheets document as a 2D list (List containing a list of rows)
+
+        :return: Str[][]
+        '''
+
+        return self.sheet.get_all_values()
 
 
 

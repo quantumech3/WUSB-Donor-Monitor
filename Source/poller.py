@@ -60,20 +60,27 @@ def update_radiothonInfo():
     # Log radiothonInfo update attempt
     dbg.log("Attempting to update server status (poller.radiothonInfo)")
 
+    # Get all data from Google sheets document
+    dbg.log("Attempting to get all the data from GSheets document.")
+    rows = database.get_all_vals()
+    dbg.success("Successfully got all data from GSheets document.")
+
+    # Throw error and exit if there is no data in GSheets document at all
+    if len(rows) == 0:
+        dbg.err("Failed to update server status because there is no data or header in Google Sheets document")
+        input("Cannot continue. Press any key to exit.")
+        os._exit(-1)
+
     # Get header from GSheets doc to compare pledges against
-    header = database.get_row(0)
+    header = rows[0]
+
     # PledgeDict accumulator
     pledges = []
-    # Get all rows with content from GSheets doc and turn them into PledgeDict's
-    # Iterate through all rows and break at the first empty one
-    for i in range(1, 1000):
-        # Get row
-        row = database.get_row(i)
-        # Break out of loop if row is empty
-        if not row:
-            break
-        # Append PledgeDict equivalent of row to variable 'pledges'
-        pledges.append(gsparser.to_Pledge(row, header))
+
+    # Get all rows with content excluding header (which is why i starts at 1)
+    # from GSheets doc and turn them into PledgeDict's
+    for i in range(1, len(rows)):
+        pledges.append(gsparser.to_Pledge(rows[i], header))
 
     # Update radiothonInfo to latest state
     radiothonInfo = gsparser.to_RadiothonInfo(pledges, config)
