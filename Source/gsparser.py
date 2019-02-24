@@ -46,6 +46,14 @@ def is_float(val=''):
         # True when decimal point is found. Used to determine when there is more then 1 decimal point (which means it isn't a float)
         found_deci = False
 
+        # Numeric strings like ' 123345' or ' 12345' count as floats
+        # Slice out all spaces before first non-space char
+        while val[0] == ' ':
+            val = val[1: len(val)]
+        # Slice out all spaces after last non-space char
+        while val[-1] == ' ':
+            val = val[0: len(val) - 1]
+
         for i in val:
             if i == '.':
                 # If a decimal point was found already, return false because '1.2.3' is not a valid float/number
