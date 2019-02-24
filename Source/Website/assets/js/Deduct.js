@@ -166,3 +166,36 @@ function totalDonated(donors=[])
 
     return total
 }
+
+/**
+ * Returns representation of param ‘millis’ showing the amount of hours (hh), minutes (mm)
+ * and seconds (ss) left. Notated as ‘hh:mm:ss’.
+ *
+ * @param: millis: Number
+ * @returns string
+ */
+function millisToStr(millis=0)
+{
+    // Accumulates days, hours, minutes and seconds left in the form 'dd:hh:mm:ss'
+    let str = '';
+
+    // Used to calculate seconds, minutes, hours and days left.
+    let time = Math.floor(millis / 1000);
+
+    // Add ':ss' part of notation to back of str. Modulus is used to make seconds wrap around from 59 to 0 like a clock.
+    str = ':' + (time % 60).toString() + str;
+
+    // Calculate how many minutes are left
+    time = Math.floor(time / 60);
+
+    // Add ':mm' part of notation to back of str. Modulus is used to make minutes wrap around from 59 to 0 like a clock.
+    str = ':' + (time % 60).toString() + str;
+
+    // Calculate how many hours are left
+    time = Math.floor(time / 60);
+
+    // Add 'hh' part of notation to back of str
+    str = time.toString() + str;
+
+    return str;
+}

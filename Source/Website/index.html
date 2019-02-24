@@ -181,7 +181,7 @@
 
         /**
          * Updates all dynamic elements of page excluding ‘time_left’.
-         * @RadiothonInfoEnum data
+         * @RadiothonInfoEnum radiothonInfo
          */
         function updatePage(radiothonInfo)
         {
@@ -251,25 +251,11 @@
                 // Get time difference between Radiothon end date and present time
                 let timeDiff = endDate - Date.now();
 
-                // If there is still time until Radiothon ends
-                if(timeDiff > 0)
-                {
-                    // Get time difference between endDate and now as string. Keep time from going negative with max() method
-                    let timeDiffStr = new Date(endDate - Date.now()).toLocaleTimeString();
+                // Make time difference bottom out at 0 because time_left should not be negative
+                timeDiff = Math.max(timeDiff, 0);
 
-                    // Cut out the ' PM' part of the string
-                    timeDiffStr = timeDiffStr.substr(0, timeDiffStr.length - 3);
-
-                    // Set 'time_left' html element
-                    $('#time_left').text(timeDiffStr);
-                }
-                // If Radiothon ended
-                else
-                {
-                    // Set time_left HTML element to display no time left because 0 time diff for date makes '07:00:00'
-                    // for some reason
-                    $('#time_left').text('00:00:00');
-                }
+                // Set time_left to timeDiff notated as 'hh:mm:ss'
+                $('#time_left').text(millisToStr(timeDiff));
             }
         }, 500)
 
