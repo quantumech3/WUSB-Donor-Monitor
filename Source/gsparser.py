@@ -143,6 +143,10 @@ def to_Pledge(row=[], head=[]):
             :return:
             '''
 
+            # If string does not exist or is empty, return false
+            if string is None or string == '':
+                return False
+
             # Slice out all spaces before first non-space char
             while string[0] == ' ':
                 string = string[1: len(string)]
@@ -150,10 +154,11 @@ def to_Pledge(row=[], head=[]):
             while string[-1] == ' ':
                 string = string[0: len(string) - 1]
 
-            if string is None:
-                return False
-            elif string.lower() in ["yes", "true", "t", "y"]:
+            # Test for keywords
+            if string.lower() in ["yes", "true", "t", "y"]:
                 return True
+
+            # Return false if none of the other tests are satisfied
             return False
 
         def dollar_to_float(string):
