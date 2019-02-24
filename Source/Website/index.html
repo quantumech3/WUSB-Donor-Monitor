@@ -242,19 +242,34 @@
         // Update 'time_left' element countdown every 0.5 seconds.
         setInterval(function()
         {
-            // Get end date of radiothon
+            // Get end date of Radiothon
             let endDate = Header.getEndDate();
 
             // If endDate is set then set timeDifference to a string containing the difference between endDate and currTime
             if(typeof endDate === 'object')
             {
-                // Get time difference between endDate and now as string
-                let timeDifference = new Date(endDate - Date.now()).toLocaleTimeString();
+                // Get time difference between Radiothon end date and present time
+                let timeDiff = endDate - Date.now();
 
-                // Cut out the ' PM' part of the string
-                timeDifference = timeDifference.substr(0, timeDifference.length - 3);
+                // If there is still time until Radiothon ends
+                if(timeDiff > 0)
+                {
+                    // Get time difference between endDate and now as string. Keep time from going negative with max() method
+                    let timeDiffStr = new Date(endDate - Date.now()).toLocaleTimeString();
 
-                $('#time_left').text(timeDifference);
+                    // Cut out the ' PM' part of the string
+                    timeDiffStr = timeDiffStr.substr(0, timeDiffStr.length - 3);
+
+                    // Set 'time_left' html element
+                    $('#time_left').text(timeDiffStr);
+                }
+                // If Radiothon ended
+                else
+                {
+                    // Set time_left HTML element to display no time left because 0 time diff for date makes '07:00:00'
+                    // for some reason
+                    $('#time_left').text('00:00:00');
+                }
             }
         }, 500)
 
