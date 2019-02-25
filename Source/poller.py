@@ -51,11 +51,7 @@ def update_radiothonInfo():
     dbg.success("Successfully refreshed GAPI credentials")
 
     # Update config
-    dbg.log("Attempting to update server config status")
     update_config_status()
-
-    # Log success
-    dbg.success("Server config status successfully updated")
 
     # Log radiothonInfo update attempt
     dbg.log("Attempting to update server status (poller.radiothonInfo)")
@@ -95,17 +91,78 @@ def update_config_status():
     :return: None
     '''
 
+    def handle_corrupt_key(dict={}, key_name="", types_allowed=None):
+        '''
+        Throws error and quits if a key with name set to value of 'key_name' does not exist or if the value associated
+        with the key is not set to type 'types_allowed'
+        Used primarily to test for corrupted server_config.json.
+
+        :param dict: ServerConfigDict
+        :param key_name: Str
+        :param types_allowed: Type[]
+        :return: None
+        '''
+
+        # Attempt to get value from key
+        try:
+            # Throw error and exit if value associated with key is not of any types specified in 'types_allowed'
+            if type(dict[key_name]) not in types_allowed:
+                # Print error message "Failed to read server_config.json. The '<key_name>' key must be set to one of the following data types: ['typename',...]"
+                dbg.err(
+                    "Failed to read server_config.json. The '" + key_name + "' key needs must be set to one of the following data types: " +
+                    str([i.__name__ for i in types_allowed]))
+
+                # Prompt for input then exit
+                input("Cannot continue. Press any key to exit..")
+                os._exit(-1)
+
+        # Throw error and exit if key cannot be found
+        except KeyError:
+            dbg.err("Failed to read server_config.json. '" + key_name + "' key does not exist in server_config.json.")
+            input("Cannot continue. Press any key to exit..")
+            os._exit(-1)
+
     global config
 
-    # Attempt to load server config
+    # Attempt to load server config and throw error if any keys either don't exist or have an invalid type
     try:
+        # Log attempt
+        dbg.log("Attempting to update server config status")
+
+        # Attempt to load JSON from server_config.json as type Dict
         config = json.load(open('../server_config.json', 'r'))
+
+        # Throw error if any keys in server_config.json are either missing or invalidly typed
+        handle_corrupt_key(config, "radiothon", [dict])
+        handle_corrupt_key(config["radiothon"], "goal", [dict])
+        handle_corrupt_key(config["radiothon"], "name", [str])
+        handle_corrupt_key(config["radiothon"], "start_date", [str])
+        handle_corrupt_key(config["radiothon"], "end_date", [str])
+        handle_corrupt_key(config["radiothon"]["goal"], "hourly", [float, int])
+        handle_corrupt_key(config["radiothon"]["goal"], "daily", [float, int])
+        handle_corrupt_key(config["radiothon"]["goal"], "weekly", [float, int])
+        handle_corrupt_key(config["radiothon"]["goal"], "total", [float, int])
+        handle_corrupt_key(config, "gsheets", [dict])
+        handle_corrupt_key(config["gsheets"], "doc_ID", [str])
+        handle_corrupt_key(config["gsheets"], "wsheet_ID", [int])
+        handle_corrupt_key(config["gsheets"], "poll_interval", [float, int])
+
     # Throw error if file does not exist
     except FileNotFoundError:
         dbg.err(
-            "Could not read server config because server_config.json does not exist. server_config.json must be in project's root directory.")
+            "Failed to read server config because server_config.json does not exist. server_config.json must be in project's root directory.")
         input("Cannot continue. Press any key to exit")
         os._exit(-1)
+
+    # Throw error if JSON from server_config.json could not be parsed
+    except json.JSONDecodeError as e:
+        dbg.err("Failed to read server_config.json. JSON Decoder threw the following error: \n'" + str(e) + "'")
+        input("Cannot continue. Press any key to exit.")
+        os._exit(-1)
+
+    # Log config loading success
+    dbg.success("Server config status successfully updated")
+
 
 def main(creds=0):
     '''

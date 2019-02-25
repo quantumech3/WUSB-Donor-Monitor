@@ -1,10 +1,10 @@
 {
 	"radiothon": {
 		"goal": {
-			"hourly": 100, 
-			"daily": 100, 
-			"weekly": 100, 
-			"total": 100
+			"hourly": 0,
+			"daily": 0,
+			"weekly": 0,
+			"total": 0
 		}, 
 
 		"name": "Radiothon name here", 
