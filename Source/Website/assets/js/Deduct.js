@@ -4,7 +4,8 @@ Project name: WUSB Donor Monitor
 
 Module name: Deduct.js
 Module description:
-        Contains helpful methods used by many modules such as ‘Page.js’ to infer new radiothon information from what was given by server.
+        Contains helpful methods used by many modules such as ‘Page.js’ to infer new radiothon information
+        from what was given by server.
 */
 
 /**
@@ -50,7 +51,7 @@ function extpCreditDonors(donors=[])
 
 /**
  * Extrapolates and returns an array of all ‘Pledge’ structures with ‘pledgeType' set to 0
- * @DonorEnum[] donors
+ * @PledgeEnum[] donors
  * @return DonorEnum[]
  */
 function extpWebDonors(donors=[])
@@ -98,7 +99,7 @@ function extpCallDonors(donors=[])
 
 /**
  * Extrapolates and returns an array of all ‘Pledge’ structures with ‘isPaid’ set to true
- * @DonorEnum[] donors
+ * @PledgeEnum[] donors
  * @return DonorEnum[]
  */
 function extpPaidDonors(donors=[])
@@ -122,7 +123,7 @@ function extpPaidDonors(donors=[])
 
 /**
  * Extrapolates and returns an array of all ‘Pledge’ structures with ‘isPaid’ set to false
- * @DonorEnum[] donors
+ * @PledgeEnum[] donors
  * @return DonorEnum[]
  */
 function extpUnpaidDonors(donors=[])
@@ -146,7 +147,7 @@ function extpUnpaidDonors(donors=[])
 
 /**
  * Returns the sum of all of ‘donors’s ‘amtDonated’ values
- * @DonorEnum[] donors
+ * @PledgeEnum[] donors
  * @return {number}
  */
 function totalDonated(donors=[])
@@ -171,7 +172,7 @@ function totalDonated(donors=[])
  * Returns representation of param ‘millis’ showing the amount of hours (hh), minutes (mm)
  * and seconds (ss) left. Notated as ‘hh:mm:ss’.
  *
- * @param: millis: Number
+ * @number: millis
  * @returns string
  */
 function millisToStr(millis=0)

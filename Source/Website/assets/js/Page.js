@@ -259,7 +259,7 @@ class Pledges
 {
     /**
      * Internal method used by setSomethingEntries() to edit table data.
-     * This method takes in a list of data and returns HTML used for <table> entries
+     * This method takes in a list of data and produces HTML containing code for table entries containing 'data'
      * @list data
      * @return {string}
      * @private
@@ -390,7 +390,7 @@ class Pledges
 
     /**
      * Sets text in ‘web_count‘ to value of ‘count’
-     * @param count
+     * @number count
      */
     static setWebCount(count)
     {
@@ -456,7 +456,7 @@ class Pledges
      * ‘entries’ contain ‘Pledge‘ structures.
      *  Sets the values inside ‘web_list‘ to ‘entries’.
      *  Specifically, it displays the ‘firstName’, ‘city’ and ‘amtDonated’ parts from each element of ‘entries’.
-     * @PledgeEnum[] entries
+     *  @PledgeEnum[] entries
      */
     static setWebEntries(entries=[])
     {

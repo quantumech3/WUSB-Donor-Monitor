@@ -5,7 +5,8 @@ Project name: WUSB Donor Monitor ©
 
 Module name: gsparser.py
 Module description:
-        This module contains methods for turning GSheets data into ‘Donor‘ and ‘RadiothonInfo’ data structures.
+    This module contains methods for parsing GSheets data to ‘Pledge‘ and ‘RadiothonInfo’ data structures,
+    as well as other useful functions used by other modules.
 '''
 
 import debug as dbg

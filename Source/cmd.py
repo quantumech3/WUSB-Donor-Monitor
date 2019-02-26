@@ -5,9 +5,12 @@ Project name: WUSB Donor Monitor ©
 
 Module name: cmd.py
 Module description:
-        This module runs on the main thread after startup has completed.
-        This module has an entry point that is called by the ‘main.py’ module.
-        This module provides a text based user interface on server side.
+    This module runs on the main thread after startup has completed, has an entry point that is invoked by the
+    ‘main.py’ module and provides a text based user interface on server side when ran.
+    This module works by calling functions associated with the command inputted by the user.
+    So 'exit' invokes exit_cmd(),
+       'refresh' invokes refresh_cmd(),
+        anything else invokes unknown_cmd()
 '''
 
 from time import sleep
@@ -20,7 +23,7 @@ def exit_cmd():
     :return: None
     '''
 
-    # Get input from user as string (input() sometimes auto-casts which could cause an error)
+    # Get input from user as string
     inpt = str(input("Are you sure you want to exit? (‘yes’ or ‘no’) \n"))
 
     # Make input lowercase so 'COMMAND' is the same as 'command'

@@ -95,7 +95,7 @@ host_thread.start()
 # Give time for host_thread to start so host.py module logs don't interfere with cmd line logs
 sleep(0.5)
 
-# Log success
+# Log that server successfully launched
 print('\n' * 3)
 print('Success! Server is running on port 80')
 

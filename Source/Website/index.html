@@ -177,10 +177,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 
     <script>
-
-
         /**
-         * Updates all dynamic elements of page excluding ‘time_left’.
+         * Updates all dynamic elements in webpage excluding ‘time_left’.
          * @RadiothonInfoEnum radiothonInfo
          */
         function updatePage(radiothonInfo)
@@ -217,7 +215,7 @@
         }
 
         /**
-         * Called when client connect to SocketIO server.
+         * Called when client successfully connects to SocketIO server.
          */
         function onSocketConnect()
         {
@@ -231,15 +229,15 @@
             });
         }
 
-        // SERVER_URL points back to server hosting the page
+        // Points back to server hosting the page
         const SERVER_URL = 'http://' + document.domain + ':' + location.port;
 
-        // Initialize SocketIO connection with server hosting webpage
+        // Initialize SocketIO connection with server hosting web page
         dbgMsg("Connecting to SocketIO server at " + SERVER_URL);
         let socket = io.connect(SERVER_URL);
         socket.on('connect', onSocketConnect);
 
-        // Update 'time_left' element countdown every 0.5 seconds.
+        // Update 'time_left' element to count time until 'end_date' every 0.5 seconds.
         setInterval(function()
         {
             // Get end date of Radiothon
@@ -258,7 +256,6 @@
                 $('#time_left').text(millisToStr(timeDiff));
             }
         }, 500)
-
     </script>
 </body>
 

@@ -5,10 +5,10 @@ Project name: WUSB Donor Monitor ©
 
 Module name: poller.py
 Module description:
-        This module runs on an independant daemon thread.
-        This module has an entry point that is called by the ‘main.py’ module.
-        This module’s purpose is to get up-to-date GSheets donor information on a certain interval.
-        The data gotten from GSheets is globally accessible by every other module.
+        This module runs on an independent daemon thread and has an entry point that is called by the ‘main.py’ module.
+        This module’s purpose is to poll for GSheets pledge information on a certain interval asynchronously.
+        The data processed from this module can be accessed by other module by either referencing the 'radiothonInfo'
+        or the 'config' variables.
 '''
 
 import gsparser
@@ -19,8 +19,7 @@ import debug as dbg
 import json
 import os
 
-# This variable gets set by the command line module when ‘reload’ command is called and on startup.
-# This variable is a ‘server_config’ data structure.
+# This var is set by the cmd.py module when ‘reload’ command is called and on startup and is a server_config Dict
 config = {}
 
 # This variable gets linked with a donor entry document when entry point is called.
@@ -45,7 +44,7 @@ def update_radiothonInfo():
     global database
     global config
 
-    # Attempt to refresh GAPI credentials (Needed otherwise Google will not accept requests after a certain period of time)
+    # Attempt to refresh GAPI credentials. Needed otherwise Google will reject requests after certain period of time.
     dbg.log("Attempting to refresh GAPI credentials")
     database.gs.login()
     dbg.success("Successfully refreshed GAPI credentials")
@@ -56,7 +55,7 @@ def update_radiothonInfo():
     # Log radiothonInfo update attempt
     dbg.log("Attempting to update server status (poller.radiothonInfo)")
 
-    # Get all data from Google sheets document
+    # Get all rows from Google sheets document
     dbg.log("Attempting to get all the data from GSheets document.")
     rows = database.get_all_vals()
     dbg.success("Successfully got all data from GSheets document.")
@@ -67,10 +66,10 @@ def update_radiothonInfo():
         input("Cannot continue. Press any key to exit.")
         os._exit(-1)
 
-    # Get header from GSheets doc to compare pledges against
+    # Get header from GSheets doc to compare pledges against.
     header = rows[0]
 
-    # PledgeDict accumulator
+    # PledgeDict accumulator. Will contain a list of 'Pledge' data structures
     pledges = []
 
     # Get all rows with content excluding header (which is why i starts at 1)
@@ -81,7 +80,7 @@ def update_radiothonInfo():
     # Update radiothonInfo to latest state
     radiothonInfo = gsparser.to_RadiothonInfo(pledges, config)
 
-    # Log radiothonInfo update attempt success
+    # Log that radiothonInfo was successfully updated
     dbg.success("Server status update successful (poller.radiothonInfo updated)")
 
 

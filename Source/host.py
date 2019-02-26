@@ -5,9 +5,9 @@ Project name: WUSB Donor Monitor ©
 
 Module name: host.py
 Module description:
-        This module runs on an independent daemon thread. This module has an entry point that is called by the ‘main.py’ module.
+    This module runs on an independent daemon thread and has an entry point that is invoked by the ‘main.py’ module.
     This modules purpose is to host HTTP server and send data to client via SocketIO.
-    All methods are declared inside the entry point because that is where they have to be declared in order for Flask to
+    All events are declared inside the entry point because that is where they have to be declared to allow Flask to
     recognize them as events.
 '''
 
@@ -24,22 +24,23 @@ import os
 # Instantiate Flask HTTP server
 http = Flask(__name__)
 
-# Instantiate SocketIO server with 'threading' mode enabled.
+# Instantiate SocketIO server with 'threading' mode enabled. (threading mode allows server to run on different threads)
 socket = SocketIO(http, async_mode='threading')
 
 def emit_pageData():
     '''
-    Emits 'pageData' event and sends 'poller.radiothonInfo' RadiothonInfo data structure to client
+    Emits 'pageData' event and sends 'poller.radiothonInfo' RadiothonInfo data structure to clients
     :return: None
     '''
 
-    # Log 'pageData' event emitting attempt
+    # Log attempt to emit 'pageData' event
     dbg.log("Attempting to emit 'pageData' event")
 
-    # If radiothonInfo is done being processed, send 'pageData' event containing radiothonInfo to client
+    # If radiothonInfo exists, send 'pageData' event containing radiothonInfo to client
     if poller.radiothonInfo:
         socket.emit('pageData', poller.radiothonInfo)
         dbg.success("'pageData' event successfully emitted")
+
     # Else throw a warning
     else:
         dbg.warn("Was not able to emit 'pageData' SocketIO event. Didn't have enough time to process 'poller.radiothonInfo'")
@@ -74,15 +75,16 @@ def main():
         # Attempt to send homepage to client
         dbg.log("Attempting to send './Website/index.html' to clients")
 
-        # Test if ./Website/index.html exists. Throw error and exit if it doesn't
+        # Test if ./Website/index.html exists.
         try:
             open('./Website/index.html', 'r')
+        # Throw error and exit if ./Website/index.html does not exist
         except FileNotFoundError:
             dbg.err("Failed to send homepage to client because './Website/index.html' does not exist.")
             input("Server cannot run without homepage... Press any key to exit.")
             os._exit(-1)
 
-        # Send html to client
+        # Send html from ./Website/index.html to client
         html = send_from_directory('./Website/', 'index.html')
         dbg.success("'./Website/index.html' successfully retrieved. Sending to clients...")
         return html
@@ -113,7 +115,7 @@ def main():
     @socket.on('connect')
     def socket_connect():
         '''
-        Emit a ‘pageData’ event and send poller.radiothonInfo to clients when a client connects
+        Emit a ‘pageData’ event and send poller.radiothonInfo to clients when a client connects through SocketIO
         '''
 
         emit_pageData()
@@ -126,6 +128,7 @@ def main():
 
         # Log success
         dbg.success("Successfully started server")
+
     # If server fails to start, throw error
     except Exception as e:
         dbg.err("Failed to start SocketIO/HTTP server on address '" + ADDRESS + ":" + str(PORT) + "'. Flask threw the following error: \n" + str(e))

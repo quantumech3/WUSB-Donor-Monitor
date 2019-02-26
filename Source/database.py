@@ -5,8 +5,10 @@ Project name: WUSB Donor Monitor ©
 
 Module name: database.py
 Module description:
-        The reason this module is developed instead of just using gsheets is to create a system of modularity
-        that will allow minimal change to be required when we switch to a local database.
+    This module contains a class that wraps around Google Sheets to provide the ability to interface with the
+    Google Sheets API.
+    The reason this module is developed instead of just using gsheets is to create a system of modularity
+    that will require minimal change when we switch to a local database.
 '''
 
 import gspread
@@ -17,17 +19,19 @@ import os
 
 class Database:
     '''
-    Wrapper for GSpread api. Allows the server to interface and get data from Google Sheets
+    Wrapper for GSpread api. Allows the server to request and receive data from Google Sheets
     '''
 
     creds = None
     '''
     GAPI credentials used to log in to Google Sheets
     '''
+
     gs = None
     '''
     Google sheets interface linked with GAPI credentials
     '''
+
     sheet = None
     '''
     Worksheet interface linked with the specified worksheet and document ID
@@ -38,8 +42,8 @@ class Database:
         Initialize new Database class with credentials, a document ID and a worksheet ID.
 
         :param doc_ID: Str: Document ID of Google Sheets document to be linked with Database class
-        :param wsheet_ID: Int: Worksheet ID of Google Sheets data to access
-        :param creds: ServiceAccountCredentials: Credentials used to gain permission to access Google Sheets data
+        :param wsheet_ID: Int: Worksheet ID of Google Sheets data to link against
+        :param creds: ServiceAccountCredentials: Credentials used to gain Google Sheets permissions
         '''
 
         try:
@@ -59,7 +63,7 @@ class Database:
 
     def set_doc(self, doc_ID='', wsheet_ID=0):
         '''
-        Links database instance with document ID 'doc_ID' and worksheet ID 'wsheet_ID'
+        Link with Google Sheets document ID 'doc_ID' and worksheet ID 'wsheet_ID'
 
         :param doc_ID: Str
         :param wsheet_ID: ID
@@ -125,7 +129,7 @@ class Database:
         '''
 
         # Throw error if val is not a Str
-        assert type(val) == type(""), "'val' parameter passed '" + str(val) + "' should be Str but isn't"
+        assert type(val) == str, "'val' parameter passed '" + str(val) + "' should be Str but isn't"
 
         # sheet.find() throws an error if cell cannot be found, so this is handled by returning 'none'
         try:
@@ -156,8 +160,8 @@ class Database:
         if cell is None:
             return None
         else:
-            # Return cell coords transformed to cartesian coords (1, 1) -> (0, 0)
-            return (cell.col - 1, cell.row - 1)
+            # Return cell coords transformed to cartesian coordinates as Tuple. (1, 1) -> (0, 0)
+            return cell.col - 1, cell.row - 1
 
     def get_col(self, x=0):
         '''
@@ -199,7 +203,7 @@ class Database:
         dbg.success("Successfully got data from row " + str(y))
         return data
 
-    def get_range(self, p1=(0,0), p2=(0,0)):
+    def get_range(self, p1=(0, 0), p2=(0, 0)):
         '''
         Gets all cells in range of the 2 tuples passed in. Returns a list of cells.
 
@@ -217,7 +221,7 @@ class Database:
         # Log range getting status (for lack of a better term)
         dbg.log("Attempting to get all cells in range (" + str(p1[0]) + ',' + str(p1[1]) + ") and (" + str(p2[0]) + ',' + str(p2[1]) + ')')
 
-        #Get cells in range of points p1 and p2 using GSheet coords (converting from cartesian coords)
+        # Get cells in range of points p1 and p2 using GSheet coords (converting from cartesian coords)
         data = self.sheet.range(p1[0] + 1, p1[1] + 1, p2[0] + 1, p2[1] + 1)
 
         # Log success
