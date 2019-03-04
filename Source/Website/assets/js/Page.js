@@ -771,29 +771,40 @@ class RecentDonor
      */
     static setDonor(donor)
     {
-        if(typeof donor.firstName === 'string')
-            RecentDonor.setName(donor.firstName);
-        else
+        // If donor does not exist, set totals and recent donor to be none.
+        // otherwise 'totals' and 'most recent donor' displays will keep there
+        // previous values
+        if(!donor)
         {
-            // Throw error if donor.firstName is not of type 'string'
-            console.error("donor.firstName with value '" + donor.firstName + "' is supposed to be type 'string' but isnt");
-
-            // Set firstName to be nothing (otherwise it will stay as it default/last value)
+            RecentDonor.setAmtDonated(0);
             RecentDonor.setName("");
         }
-
-
-        if(typeof donor.amtDonated === 'number')
-            RecentDonor.setAmtDonated(donor.amtDonated);
+        // If 'donor' exists
         else
         {
-            // Throw error if donor.firstName is not of type 'number'
-            console.error("donor.amtDonated with value '" + donor.amtDonated + "' is supposed to be type 'number' but isnt");
+            if(typeof donor.firstName === 'string')
+                RecentDonor.setName(donor.firstName);
+            else
+            {
+                // Throw error if donor.firstName is not of type 'string'
+                console.error("donor.firstName with value '" + donor.firstName + "' is supposed to be type 'string' but isnt");
 
-            // Set amtDonated to be 0 (otherwise it will stay as its default/last value)
-            RecentDonor.setAmtDonated(0);
+                // Set firstName to be nothing (otherwise it will stay as it default/last value)
+                RecentDonor.setName("");
+            }
+
+
+            if(typeof donor.amtDonated === 'number')
+                RecentDonor.setAmtDonated(donor.amtDonated);
+            else
+            {
+                // Throw error if donor.firstName is not of type 'number'
+                console.error("donor.amtDonated with value '" + donor.amtDonated + "' is supposed to be type 'number' but isnt");
+
+                // Set amtDonated to be 0 (otherwise it will stay as its default/last value)
+                RecentDonor.setAmtDonated(0);
+            }
         }
-
     }
 }
 
