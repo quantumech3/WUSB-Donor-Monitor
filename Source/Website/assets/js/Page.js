@@ -777,7 +777,9 @@ class RecentDonor
         if(!donor)
         {
             RecentDonor.setAmtDonated(0);
-            RecentDonor.setName("");
+
+            // Set name with space otherwise white box containing name doesnt display properly (yeah I know its janky)
+            RecentDonor.setName(" ");
         }
         // If 'donor' exists
         else
