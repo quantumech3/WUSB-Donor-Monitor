@@ -8,12 +8,12 @@
 		}, 
 
 		"name": "Radiothon name here", 
-		"start_date": "2/24/19", 
-		"end_date": "2/26/19"
+		"start_date": "mm/dd/yy", 
+		"end_date": "mm/dd/yy"
 	}, 
 
 	"gsheets": {
-		"doc_ID": "14xbkoqICLY-rcWnAOSJrLQkprKUJueQvZ4vkWfan-fI", 
+		"doc_ID": "Insert Google Sheets document id here", 
 		"wsheet_ID": 0, 
 		"poll_interval": 0.6
 	}
