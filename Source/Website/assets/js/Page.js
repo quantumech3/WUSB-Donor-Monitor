@@ -779,7 +779,7 @@ class RecentDonor
             RecentDonor.setAmtDonated(0);
 
             // Set name with space otherwise white box containing name doesnt display properly (yeah I know its janky)
-            RecentDonor.setName(" ");
+            RecentDonor.setName("N/A");
         }
         // If 'donor' exists
         else
@@ -792,7 +792,7 @@ class RecentDonor
                 console.error("donor.firstName with value '" + donor.firstName + "' is supposed to be type 'string' but isnt");
 
                 // Set firstName to be nothing (otherwise it will stay as it default/last value)
-                RecentDonor.setName(" ");
+                RecentDonor.setName("N/A");
             }
 
 
