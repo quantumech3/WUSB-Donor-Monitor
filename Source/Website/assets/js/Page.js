@@ -792,7 +792,7 @@ class RecentDonor
                 console.error("donor.firstName with value '" + donor.firstName + "' is supposed to be type 'string' but isnt");
 
                 // Set firstName to be nothing (otherwise it will stay as it default/last value)
-                RecentDonor.setName("");
+                RecentDonor.setName(" ");
             }
 
 
