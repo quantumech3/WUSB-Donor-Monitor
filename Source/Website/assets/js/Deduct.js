@@ -154,15 +154,19 @@ function totalDonated(donors=[])
 {
     let total = 0;
 
-    // Add all donors[i] to total
-    for(let i = 0; i < donors.length; i++)
+    // If 'donors' is not undefined
+    if(donors)
     {
-        // If donors[i].amtDonated is a number, add to total
-        if(typeof donors[i].amtDonated === 'number')
-            total += donors[i].amtDonated;
-        // If donors[i].amtDonated is not a number, throw an error
-        else
-            console.error("Invalid '" + donors[i].amtDonated + "' passed into donors[" + i + "].amtDonated. Donor.amtDonated should be number");
+        // Add all donors[i] to total
+        for(let i = 0; i < donors.length; i++)
+        {
+            // If donors[i].amtDonated is a number, add to total
+            if(typeof donors[i].amtDonated === 'number')
+                total += donors[i].amtDonated;
+            // If donors[i].amtDonated is not a number, throw an error
+            else
+                console.error("Invalid '" + donors[i].amtDonated + "' passed into donors[" + i + "].amtDonated. Donor.amtDonated should be number");
+        }
     }
 
     return total
